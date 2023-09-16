@@ -392,49 +392,81 @@
 // }
 
 // Место для первой задачи
-function getTimeFromMinutes(minutes) {
-    if (minutes < 0 || Math.round(minutes) != minutes) {
-        return 'Ошибка, проверьте данные';
+// function getTimeFromMinutes(minutes) {
+//     if (minutes < 0 || Math.round(minutes) != minutes) {
+//         return 'Ошибка, проверьте данные';
+//     }
+//     let n = Math.abs(Math.round(minutes / 60)) % 100;
+//     let n1 = n % 10;
+//     let hours;
+//     if (n > 10 && n < 20) {
+//         hours = 'часов';
+//     } else {
+//         if (n1 > 1 && n1 < 5) {
+//             hours = 'часа';
+//         }
+//         else {
+//             if (n1 == 1) {
+//                 hours = 'час';
+//             }
+//             else {
+//                 hours = 'часов';
+//             }
+//         }
+//     }
+    
+//     return ('Это ' + Math.floor(minutes / 60) + ' ' + hours + ' и ' + minutes % 60 + ' минут');
+// }
+
+// // Место для второй задачи
+// function findMaxNumber(a, b, c, d) {
+//     let numbers = [a, b, c, d];
+//     for (let i = 0; i < numbers.length; i++) {
+//         if (typeof(numbers[i]) != typeof(1)) {
+//             return 0;
+//         }
+//     }
+//     let maxNumber = numbers[0];
+    
+//     for (let i = 0; i < numbers.length; i++) {
+//         for (let j = 0; j <numbers.length; j++) {
+//             if (numbers[i] > numbers[j] & numbers[i] > maxNumber) {
+//                 maxNumber = numbers[i];
+//             }
+//         } 
+//     }
+//     return maxNumber;
+// }
+
+//20.08.2023
+
+function fib(n) {
+    let result = '',
+        previus = 1,
+        prePrevius = 0,
+        curent;
+        
+    if (typeof(n) !== typeof(1) || Math.round(n) !== n) {
+        return result;
     }
-    let n = Math.abs(Math.round(minutes / 60)) % 100;
-    let n1 = n % 10;
-    let hours;
-    if (n > 10 && n < 20) {
-        hours = 'часов';
-    } else {
-        if (n1 > 1 && n1 < 5) {
-            hours = 'часа';
-        }
-        else {
-            if (n1 == 1) {
-                hours = 'час';
-            }
-            else {
-                hours = 'часов';
+    
+    for (let i = 0; i < n; i++) {
+        if (i === 0) {
+            result += 0;
+        } else {
+            if (i === 1) {
+                result += ' ' + 1;
+            } else {
+                curent = previus + prePrevius;
+                result += ' ' + curent;
+                prePrevius = previus;
+                previus = curent;
             }
         }
     }
     
-    return ('Это ' + Math.floor(minutes / 60) + ' ' + hours + ' и ' + minutes % 60 + ' минут');
+    return result;
 }
 
-// Место для второй задачи
-function findMaxNumber(a, b, c, d) {
-    let numbers = [a, b, c, d];
-    for (let i = 0; i < numbers.length; i++) {
-        if (typeof(numbers[i]) != typeof(1)) {
-            return 0;
-        }
-    }
-    let maxNumber = numbers[0];
-    
-    for (let i = 0; i < numbers.length; i++) {
-        for (let j = 0; j <numbers.length; j++) {
-            if (numbers[i] > numbers[j] & numbers[i] > maxNumber) {
-                maxNumber = numbers[i];
-            }
-        } 
-    }
-    return maxNumber;
-}
+console.log(fib(-5));
 
