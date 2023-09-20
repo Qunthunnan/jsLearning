@@ -440,33 +440,274 @@
 
 //20.08.2023
 
-function fib(n) {
-    let result = '',
-        previus = 1,
-        prePrevius = 0,
-        curent;
+// function fib(n) {
+//     let result = '',
+//         previus = 1,
+//         prePrevius = 0,
+//         curent;
         
-    if (typeof(n) !== typeof(1) || Math.round(n) !== n) {
-        return result;
+//     if (typeof(n) !== typeof(1) || Math.round(n) !== n) {
+//         return result;
+//     }
+    
+//     for (let i = 0; i < n; i++) {
+//         if (i === 0) {
+//             result += 0;
+//         } else {
+//             if (i === 1) {
+//                 result += ' ' + 1;
+//             } else {
+//                 curent = previus + prePrevius;
+//                 result += ' ' + curent;
+//                 prePrevius = previus;
+//                 previus = curent;
+//             }
+//         }
+//     }
+    
+//     return result;
+// }
+
+// console.log(fib(-5));
+
+//16.09.2023
+
+// for(let i = 0; i <= 10; i++) {
+//     if (i % 2 === 0) {
+//         console.log(i);
+//     }
+// }
+
+// function getCoupeNumber(seat) {
+//     let seatsList = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16], [17, 18, 19, 20], [21, 22, 23, 24], [25, 26, 27, 28], [29, 30, 31, 32], [33, 34, 35, 36]];
+//     if (typeof(seat) == typeof(1) && seat > 0 && Math.round(seat) == seat) {
+//         console.log('Усі умови виконані');
+//         for (let i = 0; i < seatsList.length; i++) {
+//             for (let j = 0; j < seatsList[i].length; j++) {
+//                 if (seatsList[i][j] == seat) {
+//                     return i + 1;
+//                 }
+//             }
+//         }
+//     } else {
+//         console.log('Не усі умови виконані');
+//         if (seat === 0 || seat > 36) {
+//             return 'Таких мест в вагоне не существует';
+//         } else {
+//             return 'Ошибка. Проверьте правильность введенного номера места';
+//         }
+//     }
+// }
+
+// console.log(getCoupeNumber(37));
+
+// function fib(count) {
+//     if (Math.round(count) == count && count > 0 && typeof(count) == typeof(1)) {
+//         let previus = 0,
+//             preprevius = 0,
+//             curent = 0,
+//             result = '';
+//         for (let i = 0; i < count; i++) {
+//             if (i == count - 1) {
+//                 result += previus + preprevius;
+//             } else {
+//                 if (i === 0) {
+//                 result += '0 ';
+//                 } else {
+//                     if (i === 1) {
+//                         result += '1 ';
+//                         previus = 1;
+//                     } else {
+//                         curent = previus + preprevius;
+//                         result += curent + ' ';
+//                         preprevius = previus;
+//                         previus = curent;
+//                     }
+//                 }
+//             }
+//         }
+//         return result;
+//     } else {
+//         return '';
+//     }
+// }
+
+// console.log(fib(5));
+
+//17.09.2023
+
+// function testCallback(arg1, callback) {
+//     console.log(`first operation with ${arg1}`);
+//     callback();
+// }
+
+// testCallback('you', function() {
+//     console.log('second operation callback');
+// });
+
+// let obj = {
+//     height: 1000,
+//     width: 500,
+//     weight: 40,
+//     hideObj: {
+//         damage: 10,
+//         deffence: 30
+//     },
+
+//     getHeight: function() {
+//         return this.height;
+//     },
+//     setHeight: function(num) {
+//         if(num > 0 && num < 999) {
+//             this.height = num;
+//         }
+//     },
+//     objLog: function() {
+//         console.log('obj:\n');
+//         for(let key in this) {
+//             console.log(`${key} is ${obj[key]}`);
+//         }
+//     }
+// };
+
+// obj.objLog();
+// console.log(obj.getHeight());
+// obj.setHeight(30);
+// obj.setHeight(-100);
+// obj.objLog();
+
+// console.log('obj:\n');
+// for (let key in obj) {
+//     console.log(`${key} is ${obj[key]}`);
+// }
+
+// console.log(Object.keys(obj).length);
+
+// const {damage, deffence} = obj.hideObj;
+
+// console.log(`hideObj is ${damage} і ${deffence}`);
+
+// let arr = [1, 2, 3, 4];
+
+// arr.push(5);
+// arr.pop();
+// arr.shift();
+// arr.unshift(3);
+
+// let stringToArray = 'Доброго дня як справи',
+//     splitedArray = stringToArray.split(' '),
+//     joinedString = splitedArray.join('---'),
+//     sortedArray = splitedArray.sort();
+
+// console.log(sortedArray);
+
+// splitedArray.forEach(function (item, i, arr) {
+//     console.log(`${i}: ${item} in ${arr}`);
+//     arr[i] = i*10;
+// });
+
+// for (let i of splitedArray) {
+//     if (i > 10) {
+//         break;
+//     }
+//     console.log(i);
+// }
+
+//20.09.2023
+
+// const personalPlanPeter = {
+//     name: "Peter",
+//     age: "29",
+//     skills: {
+//         languages: ['ru', 'eng'],
+//         programmingLangs: {
+//             js: '20%',
+//             php: '10%'
+//         },
+//         exp: '1 month'
+//     },
+
+//     showAgeAndLangs: function(plan) {
+//         return `Мне ${plan.age} и я владею языками: ${plan.skills.languages.join(' ').toUpperCase()}`;
+//     }
+// };
+
+// function showExperience(plan) {
+//     const {exp} = plan.skills;
+//     return exp;
+// }
+
+// function showProgrammingLangs(plan) {
+//     let result = '';
+//     for (let key in plan.skills.programmingLangs) {
+//         result+= `Язык ${key} изучен на ${plan.skills.programmingLangs[key]}\n`;
+//     }
+//     if(result.length > 0) {
+//         return result.slice(0, -1);
+//     }
+//     return result;
+// }
+
+// console.log(showProgrammingLangs(personalPlanPeter));
+
+// const family = ['Peter', 'Ann', 'Alex', 'Linda'];
+
+// function showFamily(arr) {
+//     if(arr.length > 0) {
+//         return `Семья состоит из: ${arr.join(' ')}`;
+//     } else {
+//         return 'Семья пуста';
+//     }
+// }
+
+// console.log(showFamily(family));
+
+// const favoriteCities = ['liSBon', 'ROME', 'miLan', 'Dublin'];
+
+// function standardizeStrings(arr) {
+//     for(let key of arr) {
+//         console.log(key.toLowerCase());
+//     }
+// }
+
+// standardizeStrings(favoriteCities);
+
+const someString = 'This is some strange string';
+
+function reverse(str) {
+    if(typeof(str) == 'string') {
+        // let result = '';
+        // for (let i = str.length - 1; i >= 0; i--) {
+        //     result += str[i];
+        // }
+        return str.split('').reverse().join('');
+    } else {
+        return 'Ошибка!';
+    }
+}
+
+console.log(reverse(someString));
+
+const baseCurrencies = ['USD', 'EUR'];
+const additionalCurrencies = ['UAH', 'RUB', 'CNY'];
+
+function availableCurr(arr, missingCurr) {
+    let result = [];
+    if(typeof(missingCurr) == 'undefined') {
+        return arr;
     }
     
-    for (let i = 0; i < n; i++) {
-        if (i === 0) {
-            result += 0;
-        } else {
-            if (i === 1) {
-                result += ' ' + 1;
-            } else {
-                curent = previus + prePrevius;
-                result += ' ' + curent;
-                prePrevius = previus;
-                previus = curent;
+    if(arr.length > 0) {
+        for (let key of arr) {
+            for (let value of missingCurr) {
+                if (key != value) {
+                    result += key;
+                }
             }
         }
     }
-    
-    return result;
+
+    return 'Нет доступных валют';
 }
 
-console.log(fib(-5));
-
+console.log(availableCurr(baseCurrencies));
