@@ -672,42 +672,230 @@
 
 // standardizeStrings(favoriteCities);
 
-const someString = 'This is some strange string';
+// const someString = 'This is some strange string';
 
-function reverse(str) {
-    if(typeof(str) == 'string') {
-        // let result = '';
-        // for (let i = str.length - 1; i >= 0; i--) {
-        //     result += str[i];
-        // }
-        return str.split('').reverse().join('');
-    } else {
-        return 'Ошибка!';
-    }
-}
+// function reverse(str) {
+//     if(typeof(str) == 'string') {
+//         // let result = '';
+//         // for (let i = str.length - 1; i >= 0; i--) {
+//         //     result += str[i];
+//         // }
+//         return str.split('').reverse().join('');
+//     } else {
+//         return 'Ошибка!';
+//     }
+// }
 
-console.log(reverse(someString));
+// console.log(reverse(someString));
 
-const baseCurrencies = ['USD', 'EUR'];
-const additionalCurrencies = ['UAH', 'RUB', 'CNY'];
+// const baseCurrencies = ['USD', 'EUR'];
+// const additionalCurrencies = ['UAH', 'RUB', 'CNY'];
 
-function availableCurr(arr, missingCurr) {
-    let result = [];
-    if(typeof(missingCurr) == 'undefined') {
-        return arr;
-    }
-    
-    if(arr.length > 0) {
-        for (let key of arr) {
-            for (let value of missingCurr) {
-                if (key != value) {
-                    result += key;
+// function availableCurr(arr, missingCurr) {
+//     if(arr.length > 0) {
+//         if(typeof(missingCurr) == 'undefined') {
+//             return arr;
+//         }
+//         let result = [];
+//         for (let key of arr) {
+//             for (let value of missingCurr) {
+//                 if (key != value) {
+//                     result += key + '\n';
+//                 }
+//             }
+//         }
+//         return `Доступные валюты:\n${result}`;
+//     }
+//     return 'Нет доступных валют';
+// } 
+
+
+// console.log(availableCurr([...baseCurrencies, ...additionalCurrencies], ['CNY']));
+
+//24.09.2023
+
+// const baseCurrencies = ['USD', 'EUR'];
+// const additionalCurrencies = ['UAH', 'RUB', 'CNY'];
+
+// function availableCurr(arr, missingCurr) {
+//     if(arr.length > 0) {
+//         if(typeof(missingCurr) == 'undefined') {
+//             dubleCutter(arr);
+//             return `Доступные валюты:\n${arr.join('\n')}\n`;
+//         }
+//         if (typeof(missingCurr) != 'object') {
+//             dubleCutter(arr);
+//             let result = [];
+//             for (let key of arr) {
+//                 if (key != missingCurr) {
+//                     result += key + '\n';
+//                 }
+//             }
+//             return `Доступные валюты:\n${result}`;
+//         }
+//         console.log(arr);
+//         dubleCutter(arr);
+//         console.log(missingCurr);
+//         dubleCutter(missingCurr);
+//         let result = [];
+//         for (let key of arr) {
+//             for (let value of missingCurr) {
+//                 if (key != value) {
+//                     result += key + '\n';
+//                 }
+//             }
+//         }
+//         return `Доступные валюты:\n${result}`;
+//     }
+//     return 'Нет доступных валют';
+// }
+
+// function dubleCutter (arr) {
+//     if(arr.length > 1 && typeof(arr) == 'object') {
+//         for (let i = 0; i < arr.length; i++) {
+//             console.log(`for 1 i[${i}] = ${arr[i]}`);
+//            start1: for (let k = 0; k < arr.length; k++) {
+//                     console.log(`for 2 i[${i}] = ${arr[i]}`);
+//                     console.log(`for 2 k[${k}] = ${arr[k]}`);
+//                     if (i == k) {
+//                         console.log('i === k skip');
+//                         continue;
+//                     }
+//                     console.log(`i[${i}]=${arr[i]} ? k[${k}]=${arr[k]}`);
+//                     if (arr[i] == arr[k]) {
+//                         console.log(`i = k`);
+//                         delete arr[k];
+//                         console.log(arr);
+//                         if (k < arr.length - 1) {
+//                             for(let l = k; l < arr.length; l++)  {
+//                                 console.log(` for 3 l[${l}] = ${arr[l]}`);
+//                                 arr[l] = arr[l+1];
+//                                 if (l == arr.length - 2) {
+//                                     arr.pop();
+//                                     console.log(arr);
+//                                     l++;
+//                                     continue start1;
+//                                 }
+//                             }
+//                         } else {
+//                             arr.pop();
+//                         }
+//                     }
+//             }
+//         }
+//     }
+// }
+
+// let cur = 'USD';
+// cur[0] = cur;
+// console.log(cur + ` is ${typeof(cur)}`);
+
+// let curency = ['USD','EUR', 'UAH', 'RUB', 'CNY'];
+// console.log(typeof(curency[0]));
+// console.log(curency);
+// dubleCutter(curency);
+// console.log('result = '+ curency);
+
+// console.log(availableCurr([...baseCurrencies, ...additionalCurrencies], ['CNY']));
+
+// let arr = [31, 'dgdgdgdg', 242424, 'dgojrogjrogjojgd'];
+// console.dir(arr);
+
+// const soldier = {
+//     health: 100,
+//     fatigue: 100,
+//     showHealth : function () {
+//         console.log(this.health);
+//     }
+// };
+
+// const vehicleSoldier = {
+//     health: 70,
+// };
+// Object.setPrototypeOf(vehicleSoldier, soldier);
+// // vehicleSoldier.__proto__ = soldier;
+
+
+
+// // const vehicleSoldier = Object.create(soldier);
+
+// vehicleSoldier.showHealth();
+
+
+let personalMovieDB = {
+        count: 0,
+        movies: {},
+        actors: {},
+        genres: [],
+        privat: false,
+
+        nameAnswer: function() {
+            let movieGrade;
+            let movieNameAnswer;
+            first: do {
+                movieNameAnswer = prompt('Який фільм ви подивились ?');
+                if (movieNameAnswer == null) {
+                    movieNameAnswer = '';
+                    continue first;
                 }
+                console.log(movieNameAnswer);
+                console.log(movieNameAnswer.length);
+            } while (movieNameAnswer.length == 0 || movieNameAnswer.length > 50);
+            
+            do {
+                movieGrade = +prompt('Скільки йому поставиш? (від 1 до 10)');
+                console.log(typeof(movieGrade));
+                console.log(movieGrade);
+            } while (movieGrade < 0 || movieGrade > 10 || isNaN(movieGrade));
+            this.movies[movieNameAnswer] = movieGrade;
+        },
+
+        filmsCount: function() {
+            let movieCount;
+            movieCount = +prompt('Скільки фільмів ви подивились?');
+        
+            if (movieCount < 10) {
+                console.log('Малувато подивились..');
+                this.count = movieCount;
+            } else {
+                if (movieCount < 30) {
+                    console.log('Справжній classic...');
+                    this.count = movieCount;
+                } else {
+                    if (movieCount > 30) {
+                        console.log('Ви справжній MASTER');
+                        this.count = movieCount;
+                    } else {
+                        console.log('Сталася помилка!' + movieCount + typeof(movieCount));
+                    }
+                    }
+                }
+        },
+
+        showMyDB: function() {
+            if (this.privat == false) {
+                console.dir(this);
+            }
+        },
+
+        writeYourGenrses: function() {
+            for (let i = 0; i < 3; i++) {
+                do {
+                    this.genres[i] = prompt(`Ваш улюблений жанр під номером: ${i + 1}`);
+                } while (this.genres[i] == undefined || this.genres[i] == null || this.genres[i] == '');
+            }
+            this.genres.forEach(function (item, i, arr) {
+                console.log(`Улюблений жанр №${i+1} - це ${item}`);
+            });
+        },
+
+        toggleVisibleMyDB: function() {
+            if(this.privat == true) {
+                this.privat = false;
+            } else {
+                this.privat = true;
             }
         }
-    }
+    };
 
-    return 'Нет доступных валют';
-}
-
-console.log(availableCurr(baseCurrencies));
+    personalMovieDB.writeYourGenrses();
