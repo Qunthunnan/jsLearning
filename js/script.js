@@ -822,80 +822,202 @@
 // vehicleSoldier.showHealth();
 
 
-let personalMovieDB = {
-        count: 0,
-        movies: {},
-        actors: {},
-        genres: [],
-        privat: false,
+// let personalMovieDB = {
+//         count: 0,
+//         movies: {},
+//         actors: {},
+//         genres: [],
+//         privat: false,
 
-        nameAnswer: function() {
-            let movieGrade;
-            let movieNameAnswer;
-            first: do {
-                movieNameAnswer = prompt('Який фільм ви подивились ?');
-                if (movieNameAnswer == null) {
-                    movieNameAnswer = '';
-                    continue first;
-                }
-                console.log(movieNameAnswer);
-                console.log(movieNameAnswer.length);
-            } while (movieNameAnswer.length == 0 || movieNameAnswer.length > 50);
+//         nameAnswer: function() {
+//             let movieGrade;
+//             let movieNameAnswer;
+//             first: do {
+//                 movieNameAnswer = prompt('Який фільм ви подивились ?');
+//                 if (movieNameAnswer == null) {
+//                     movieNameAnswer = '';
+//                     continue first;
+//                 }
+//                 console.log(movieNameAnswer);
+//                 console.log(movieNameAnswer.length);
+//             } while (movieNameAnswer.length == 0 || movieNameAnswer.length > 50);
             
-            do {
-                movieGrade = +prompt('Скільки йому поставиш? (від 1 до 10)');
-                console.log(typeof(movieGrade));
-                console.log(movieGrade);
-            } while (movieGrade < 0 || movieGrade > 10 || isNaN(movieGrade));
-            this.movies[movieNameAnswer] = movieGrade;
-        },
+//             do {
+//                 movieGrade = +prompt('Скільки йому поставиш? (від 1 до 10)');
+//                 console.log(typeof(movieGrade));
+//                 console.log(movieGrade);
+//             } while (movieGrade < 0 || movieGrade > 10 || isNaN(movieGrade));
+//             this.movies[movieNameAnswer] = movieGrade;
+//         },
 
-        filmsCount: function() {
-            let movieCount;
-            movieCount = +prompt('Скільки фільмів ви подивились?');
+//         filmsCount: function() {
+//             let movieCount;
+//             movieCount = +prompt('Скільки фільмів ви подивились?');
         
-            if (movieCount < 10) {
-                console.log('Малувато подивились..');
-                this.count = movieCount;
-            } else {
-                if (movieCount < 30) {
-                    console.log('Справжній classic...');
-                    this.count = movieCount;
-                } else {
-                    if (movieCount > 30) {
-                        console.log('Ви справжній MASTER');
-                        this.count = movieCount;
-                    } else {
-                        console.log('Сталася помилка!' + movieCount + typeof(movieCount));
-                    }
-                    }
-                }
-        },
+//             if (movieCount < 10) {
+//                 console.log('Малувато подивились..');
+//                 this.count = movieCount;
+//             } else {
+//                 if (movieCount < 30) {
+//                     console.log('Справжній classic...');
+//                     this.count = movieCount;
+//                 } else {
+//                     if (movieCount > 30) {
+//                         console.log('Ви справжній MASTER');
+//                         this.count = movieCount;
+//                     } else {
+//                         console.log('Сталася помилка!' + movieCount + typeof(movieCount));
+//                     }
+//                     }
+//                 }
+//         },
 
-        showMyDB: function() {
-            if (this.privat == false) {
-                console.dir(this);
-            }
-        },
+//         showMyDB: function() {
+//             if (this.privat == false) {
+//                 console.dir(this);
+//             }
+//         },
 
-        writeYourGenrses: function() {
-            for (let i = 0; i < 3; i++) {
-                do {
-                    this.genres[i] = prompt(`Ваш улюблений жанр під номером: ${i + 1}`);
-                } while (this.genres[i] == undefined || this.genres[i] == null || this.genres[i] == '');
-            }
-            this.genres.forEach(function (item, i, arr) {
-                console.log(`Улюблений жанр №${i+1} - це ${item}`);
-            });
-        },
+//         writeYourGenrses: function() {
+//             for (let i = 0; i < 3; i++) {
+//                 do {
+//                     this.genres[i] = prompt(`Ваш улюблений жанр під номером: ${i + 1}`);
+//                 } while (this.genres[i] == undefined || this.genres[i] == null || this.genres[i] == '');
+//             }
+//             this.genres.forEach(function (item, i, arr) {
+//                 console.log(`Улюблений жанр №${i+1} - це ${item}`);
+//             });
+//         },
 
-        toggleVisibleMyDB: function() {
-            if(this.privat == true) {
-                this.privat = false;
-            } else {
-                this.privat = true;
-            }
+//         toggleVisibleMyDB: function() {
+//             if(this.privat == true) {
+//                 this.privat = false;
+//             } else {
+//                 this.privat = true;
+//             }
+//         }
+//     };
+
+//     personalMovieDB.writeYourGenrses();
+
+//25.09.2023
+
+const shoppingMallData = {
+    shops: [
+        {
+            width: 10,
+            length: 5
+        },
+        {
+            width: 15,
+            length: 7
+        },
+        {
+            width: 20,
+            length: 5
+        },
+        {
+            width: 8,
+            length: 10
         }
-    };
+    ],
+    height: 5,
+    moneyPer1m3: 30,
+    budget: 50000,
 
-    personalMovieDB.writeYourGenrses();
+    areaOfAllShops: function () {
+        let area = 0;
+        for(let key of this.shops) {
+            console.log(key);
+            console.log(`key.width = ${key.width} * key.length = ${key.length} = ${key.width * key.length}`);
+            area += key.width * key.length;
+        }
+        console.log(area);
+        return area;
+    },
+    volumeOfHeating: function () {
+        return this.areaOfAllShops() * this.height;
+    }
+};
+
+const penis = {
+    shops: [
+        {
+            width: 10,
+            length: 5
+        },
+        {
+            width: 15,
+            length: 7
+        },
+        {
+            width: 20,
+            length: 5
+        },
+        {
+            width: 8,
+            length: 10
+        }
+    ],
+    height: 5,
+    moneyPer1m3: 30,
+    budget: 50000
+};
+
+function isBudgetEnough(data) {
+
+    if ("volumeOfHeating" in data === false) {
+        Object.setPrototypeOf(data, shoppingMallData);
+    } 
+
+    if ("volumeOfHeating" in data === false) {
+        console.log('якась хуйня');
+    } else {
+        if (data.volumeOfHeating() * data.moneyPer1m3 <= data.budget) {
+            return 'Бюджета достаточно';
+        } else {
+            return 'Бюджета недостаточно';
+        }
+    }
+}
+
+isBudgetEnough(penis);
+
+
+const students = ['Peter', 'Andrew', 'Ann', 'Mark', 'Josh', 'Sandra', 'Cris', 'Bernard', 'Takesi', 'Sam', 'Somebody'];
+
+function sortStudentsByGroups(arr) {
+    arr.sort();
+    console.log (`sorted:\n${arr}`);
+    let resultArr = [],
+        remainder = 'Оставшиеся студенты: -',
+        counter = 0;
+
+    resultArr.push(remainder);
+    for (let i = 0; i < arr.length; i++) {
+        counter++;
+        if(counter == 1) {
+            resultArr[resultArr.length-1] = remainder.slice(0, -1);
+        }
+
+        if(i != arr.length - 1) {
+            resultArr[resultArr.length-1] += `${arr[i]}, `;
+        } else {
+            resultArr[resultArr.length-1] += arr[i];
+        }
+
+        if(counter == 3) {
+            counter = 0;
+            if(i != arr.length - 1) {
+                resultArr[resultArr.length - 1] = (resultArr[resultArr.length - 1].slice(21, -2).split(', '));
+            } else {
+                resultArr[resultArr.length - 1] = (resultArr[resultArr.length - 1].slice(21).split(', '));
+            }
+            resultArr.push(remainder);
+        }
+    }
+
+    return resultArr;
+}
+
+console.log(sortStudentsByGroups(students));
