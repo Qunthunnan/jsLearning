@@ -806,18 +806,23 @@
 //     fatigue: 100,
 //     showHealth : function () {
 //         console.log(this.health);
+//         console.log(this.fatigue);
 //     }
 // };
 
 // const vehicleSoldier = {
-//     health: 70,
 // };
 // Object.setPrototypeOf(vehicleSoldier, soldier);
-// // vehicleSoldier.__proto__ = soldier;
+// const vehicleSoldier = Object.create(soldier);
+// vehicleSoldier.health=30;
+// vehicleSoldier.fatigue=10;
+// vehicleSoldier.showHealth();
+// soldier.showHealth();
+// vehicleSoldier.__proto__ = soldier;
 
 
 
-// // const vehicleSoldier = Object.create(soldier);
+// const vehicleSoldier = Object.create(soldier);
 
 // vehicleSoldier.showHealth();
 
@@ -902,122 +907,251 @@
 
 //25.09.2023
 
-const shoppingMallData = {
-    shops: [
-        {
-            width: 10,
-            length: 5
-        },
-        {
-            width: 15,
-            length: 7
-        },
-        {
-            width: 20,
-            length: 5
-        },
-        {
-            width: 8,
-            length: 10
-        }
-    ],
-    height: 5,
-    moneyPer1m3: 30,
-    budget: 50000,
+// const shoppingMallData = {
+//     shops: [
+//         {
+//             width: 10,
+//             length: 5
+//         },
+//         {
+//             width: 15,
+//             length: 7
+//         },
+//         {
+//             width: 20,
+//             length: 5
+//         },
+//         {
+//             width: 8,
+//             length: 10
+//         }
+//     ],
+//     height: 5,
+//     moneyPer1m3: 30,
+//     budget: 50000,
 
-    areaOfAllShops: function () {
-        let area = 0;
-        for(let key of this.shops) {
-            console.log(key);
-            console.log(`key.width = ${key.width} * key.length = ${key.length} = ${key.width * key.length}`);
-            area += key.width * key.length;
-        }
-        console.log(area);
-        return area;
-    },
-    volumeOfHeating: function () {
-        return this.areaOfAllShops() * this.height;
-    }
-};
+//     areaOfAllShops: function () {
+//         let area = 0;
+//         for(let key of this.shops) {
+//             console.log(key);
+//             console.log(`key.width = ${key.width} * key.length = ${key.length} = ${key.width * key.length}`);
+//             area += key.width * key.length;
+//         }
+//         console.log(area);
+//         return area;
+//     },
+//     volumeOfHeating: function () {
+//         return this.areaOfAllShops() * this.height;
+//     }
+// };
 
-const penis = {
-    shops: [
-        {
-            width: 10,
-            length: 5
-        },
-        {
-            width: 15,
-            length: 7
-        },
-        {
-            width: 20,
-            length: 5
-        },
-        {
-            width: 8,
-            length: 10
-        }
-    ],
-    height: 5,
-    moneyPer1m3: 30,
-    budget: 50000
-};
+// const penis = {
+//     shops: [
+//         {
+//             width: 10,
+//             length: 5
+//         },
+//         {
+//             width: 15,
+//             length: 7
+//         },
+//         {
+//             width: 20,
+//             length: 5
+//         },
+//         {
+//             width: 8,
+//             length: 10
+//         }
+//     ],
+//     height: 5,
+//     moneyPer1m3: 30,
+//     budget: 50000
+// };
 
-function isBudgetEnough(data) {
+// function isBudgetEnough(data) {
 
-    if ("volumeOfHeating" in data === false) {
-        Object.setPrototypeOf(data, shoppingMallData);
-    } 
+//     if ("volumeOfHeating" in data === false) {
+//         Object.setPrototypeOf(data, shoppingMallData);
+//     } 
 
-    if ("volumeOfHeating" in data === false) {
-        console.log('якась хуйня');
-    } else {
-        if (data.volumeOfHeating() * data.moneyPer1m3 <= data.budget) {
-            return 'Бюджета достаточно';
-        } else {
-            return 'Бюджета недостаточно';
-        }
-    }
-}
+//     if ("volumeOfHeating" in data === false) {
+//         console.log('якась хуйня');
+//     } else {
+//         if (data.volumeOfHeating() * data.moneyPer1m3 <= data.budget) {
+//             return 'Бюджета достаточно';
+//         } else {
+//             return 'Бюджета недостаточно';
+//         }
+//     }
+// }
 
-isBudgetEnough(penis);
+// isBudgetEnough(penis);
 
 
-const students = ['Peter', 'Andrew', 'Ann', 'Mark', 'Josh', 'Sandra', 'Cris', 'Bernard', 'Takesi', 'Sam', 'Somebody'];
+// const students = ['Peter', 'Andrew', 'Ann', 'Mark', 'Josh', 'Sandra', 'Cris', 'Bernard', 'Takesi', 'Sam', 'Somebody'];
 
-function sortStudentsByGroups(arr) {
-    arr.sort();
-    console.log (`sorted:\n${arr}`);
-    let resultArr = [],
-        remainder = 'Оставшиеся студенты: -',
-        counter = 0;
+// function sortStudentsByGroups(arr) {
+//     arr.sort();
+//     console.log (`sorted:\n${arr}`);
+//     let resultArr = [],
+//         remainder = 'Оставшиеся студенты: -',
+//         counter = 0;
 
-    resultArr.push(remainder);
-    for (let i = 0; i < arr.length; i++) {
-        counter++;
-        if(counter == 1) {
-            resultArr[resultArr.length-1] = remainder.slice(0, -1);
-        }
+//     resultArr.push(remainder);
+//     for (let i = 0; i < arr.length; i++) {
+//         counter++;
+//         if(counter == 1) {
+//             resultArr[resultArr.length-1] = remainder.slice(0, -1);
+//         }
 
-        if(i != arr.length - 1) {
-            resultArr[resultArr.length-1] += `${arr[i]}, `;
-        } else {
-            resultArr[resultArr.length-1] += arr[i];
-        }
+//         if(i != arr.length - 1) {
+//             resultArr[resultArr.length-1] += `${arr[i]}, `;
+//         } else {
+//             resultArr[resultArr.length-1] += arr[i];
+//         }
 
-        if(counter == 3) {
-            counter = 0;
-            if(i != arr.length - 1) {
-                resultArr[resultArr.length - 1] = (resultArr[resultArr.length - 1].slice(21, -2).split(', '));
-            } else {
-                resultArr[resultArr.length - 1] = (resultArr[resultArr.length - 1].slice(21).split(', '));
-            }
-            resultArr.push(remainder);
-        }
-    }
+//         if(counter == 3) {
+//             counter = 0;
+//             if(i != arr.length - 1) {
+//                 resultArr[resultArr.length - 1] = (resultArr[resultArr.length - 1].slice(21, -2).split(', '));
+//             } else {
+//                 resultArr[resultArr.length - 1] = (resultArr[resultArr.length - 1].slice(21).split(', '));
+//             }
+//             resultArr.push(remainder);
+//         }
+//     }
 
-    return resultArr;
-}
+//     return resultArr;
+// }
 
-console.log(sortStudentsByGroups(students));
+// console.log(sortStudentsByGroups(students));
+
+//29.09.2023
+
+// console.log(typeof(NaN));
+
+// let a = 0,
+//     b = 1;
+
+// console.log(a && b);
+// console.log(!!(a && b));
+
+// const restorantData = {
+//     menu: [
+//         {
+//             name: 'Salad Caesar',
+//             price: '14$'
+//         },
+//         {
+//             name: 'Pizza Diavola',
+//             price: '9$'
+//         },
+//         {
+//             name: 'Beefsteak',
+//             price: '17$'
+//         },
+//         {
+//             name: 'Napoleon',
+//             price: '7$'
+//         }
+//     ],
+//     waitors: [
+//         {name: 'Alice', age: 22}, {name: 'John', age: 24}
+//     ],
+//     averageLunchPrice: '20$',
+//     openNow: true,
+
+//     createNewRestoran: function () {
+//         return {
+//             menu: [],
+//             waitors: [],
+//             averageLunchPrice: '',
+//             openNow: false
+//         };
+//     }
+// };
+
+// function isOpen(prop) {
+//     let answer = '';
+//     prop ? answer = 'Открыто' : answer = 'Закрыто';
+
+//     return answer;
+// }
+
+// console.log(isOpen(restorantData.openNow));
+
+// function isAverageLunchPriceTrue(fDish, sDish, average) {
+//     if (+fDish.price.slice(0, -1) + (+sDish.price.slice(0, -1)) < +average.slice(0, -1)) {
+//         return 'Цена ниже средней';
+//     } else {
+//         return 'Цена выше средней';
+//     }
+// }
+
+// console.log(isAverageLunchPriceTrue(restorantData.menu[0], restorantData.menu[1], restorantData.averageLunchPrice));
+
+// function transferWaitors(data) { 
+//     const copy = data.createNewRestoran();
+
+//     copy.waitors.unshift({name: 'Mike', age: 32});
+//     return copy;
+// }
+
+// console.log(transferWaitors(restorantData));
+
+// console.log(restorantData.waitors);
+
+// const box = document.getElementById('box');
+// console.log(box);
+// const buttons = document.getElementsByTagName('button');
+// console.log(buttons);
+// const hearts = document.getElementsByClassName('heart');
+// console.log(hearts);
+
+// const box = document.querySelector('#box');
+// console.log(box);
+const heartsWrapper = document.querySelector('.wrapper'),
+      hearts = heartsWrapper.querySelectorAll('.heart');
+
+hearts.forEach(item => {
+    console.log(item);
+});
+// const hearts = document.querySelectorAll('.heart');
+// console.dir(hearts[0]);
+
+// hearts.forEach( item => {
+//     item.style.display = 'block';
+//     item.style.background = 'green';
+// });
+// heartsWrapper.style.display = 'flex';
+// heartsWrapper.style.justifyContent = 'space-between';
+
+// hearts.forEach( item => {
+//     item.style.cssText = 'display: block; background: green; height: 300px; width: 500px;';
+// });
+// heartsWrapper.style.cssText = 'display: flex; justify-content: space-between;';
+
+// const blackBox = document.createElement('div');
+// blackBox.classList.add('black');
+// blackBox.style.cssText = 'width: auto; height: auto;';
+// document.body.append(blackBox);
+
+// document.querySelector('.wrapper').append(blackBox);
+// document.querySelector('.wrapper').prepend(blackBox);
+// document.querySelector('.wrapper').before(blackBox);
+// document.querySelector('.wrapper').after(blackBox);
+// hearts[0].remove();
+// hearts[1].replaceWith(document.querySelectorAll('.circle')[0]);
+
+// heartsWrapper.appendChild(blackBox);
+
+// blackBox.innerHTML = '<h1>БАВОВНА</h1>';
+// blackBox.innerText = 'казати бавовна - це крінж у 2023 році, так кажуть тільки якійсь зашкварні чєли, які слухають байрактарні пісні та прославляють шароварщину';
+// blackBox.insertAdjacentHTML('afterbegin', '<h2>БАВОВНА</h2>');
+// heartsWrapper.insertBefore(blackBox, hearts[1]);
+// heartsWrapper.removeChild(hearts[2]);
+// heartsWrapper.replaceChild(document.getElementsByClassName('circle')[0], hearts[0]);
+
+// console.log(hearts);
+// console.log(hearts[1]);
