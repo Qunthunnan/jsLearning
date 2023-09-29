@@ -1027,7 +1027,7 @@
 
 // console.log(sortStudentsByGroups(students));
 
-//29.09.2023
+//28.09.2023
 
 // console.log(typeof(NaN));
 
@@ -1111,12 +1111,12 @@
 
 // const box = document.querySelector('#box');
 // console.log(box);
-const heartsWrapper = document.querySelector('.wrapper'),
-      hearts = heartsWrapper.querySelectorAll('.heart');
+// const heartsWrapper = document.querySelector('.wrapper'),
+//       hearts = heartsWrapper.querySelectorAll('.heart');
 
-hearts.forEach(item => {
-    console.log(item);
-});
+// hearts.forEach(item => {
+//     console.log(item);
+// });
 // const hearts = document.querySelectorAll('.heart');
 // console.dir(hearts[0]);
 
@@ -1155,3 +1155,42 @@ hearts.forEach(item => {
 
 // console.log(hearts);
 // console.log(hearts[1]);
+
+// const btns = document.querySelectorAll('button');
+// btns[1].addEventListener('click', () => {
+//     alert('БЕМ');
+// });
+
+// btns[1].addEventListener('click', (e) => {
+//     e.target.style.backgroundColor = 'gray';
+// });
+// let i = 0;
+// const colorBtn = function (e) {
+//     e.target.style.backgroundColor = 'gray';
+//     e.target.innerText = `${i+2}`;
+//     i++;
+//     if (i == 5) {
+//         e.target.style.backgroundColor = 'black';
+//         e.target.removeEventListener('click', colorBtn);
+//     }
+// };
+// btns[0].addEventListener('click', colorBtn);
+
+// let i = 0;
+// const colorBtn = function (e) {
+//         e.target.innerText = `${i+2}`;
+//         console.log(e.currentTarget);
+//         console.log(e.type);
+//         i++;
+//     };
+// btns[0].addEventListener('click', colorBtn);
+// document.querySelector('.button-wrapper').addEventListener('click', colorBtn);
+
+// const link = document.querySelector('.udemi-link');
+// link.addEventListener('click', e => {
+//     e.preventDefault();
+//     console.log('ПОПАВСЯ ЖУК, А ТИ МАЄШ ФАЙНИЙ АРОМАТ!!');
+// });
+
+// link.addEventListener('click', actionWithLink, {once: true});
+
