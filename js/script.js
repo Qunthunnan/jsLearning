@@ -1194,3 +1194,104 @@
 
 // link.addEventListener('click', actionWithLink, {once: true});
 
+//02.10.2023
+// function pow (x, n) {
+//     if (n === 1) {
+//         return x;
+//     } else {
+//         return x *= pow(x, n - 1);
+//     }
+// }
+// console.log(pow(2,5));
+
+// let students = {
+//     js: [{
+//         name: 'John',
+//         progress: 100
+//     }, {
+//         name: 'Ivan',
+//         progress: 60
+//     }],
+
+//     html: {
+//         basic: [{
+//             name: 'Peter',
+//             progress: 20
+//         }, {
+//             name: 'Ann',
+//             progress: 18
+//         }],
+
+//         pro: [{
+//             name: 'Sam',
+//             progress: 10
+//         }],
+
+//         semi: {
+//             students: [{
+//                 name: 'Liudmyla',
+//                 progress: 30
+//             }, {
+//                 name: 'Kyrylo',
+//                 progress: 29
+//             }]
+//         }
+//     },
+
+//     averageProgressIteration: function () {
+//         let students = 0,
+//             totalResult = 0;
+        
+//         for (let course of Object.values(this)) {
+//             if (Array.isArray(course)) {
+//                 for (let i = 0; i < course.length; i++) {
+//                     students++;
+//                     totalResult+=course[i].progress;
+//                 }
+//             } else {
+//                 for (let subcourse in course) {
+//                     Object.keys(course).length;
+//                     for (let i = 0; i < Object.keys(course[subcourse]).length; i++) {
+//                         students++;
+//                         totalResult+=course[subcourse][i].progress;
+//                     }
+//                 }
+//             }
+//         }
+        
+//         if(students === 0) {
+//             return 0;
+//         }
+//         return totalResult / students;
+//     },
+// };
+
+// function averageProgressRecursion (data) {debugger;
+//     if(Array.isArray(data)) {
+//         let students = 0,
+//             totalResult = 0;
+
+//         for(let i = 0; i < data.length; i++) {
+//             students++;
+//             totalResult+= data[i].progress;
+//         }
+
+//         return [totalResult, students];
+//     } else {
+//         let result = [0, 0],
+//             test;
+//         for(let item of Object.values(data)) {
+//             test = averageProgressRecursion(item);
+//             result[0] += test[0];
+//             result[1] += test[1];
+//         }
+//         if(result[1] > 0) {
+//             return result[0] / result[1];
+//         }
+//         return 0
+//     }
+// }
+// console.log(students.averageProgressIteration());
+
+// console.log(`result: ${averageProgressRecursion(students)}`);
+
