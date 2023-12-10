@@ -1295,3 +1295,230 @@
 
 // console.log(`result: ${averageProgressRecursion(students)}`);
 
+// let score;
+
+// console.log(score ?? 13);
+//Nulish оператор дозволяє перевіряти значення на null або undefined
+
+// let test = {
+//     height: 100,
+//     width: 20
+// }
+
+// console.log(test.width.left?.array);
+//?. - оператор опціонального ланцюга - перевіряє значення зліва, якщо null або undefined, то замість помилки, він поверне undefined, корисно, якщо нема впевненості на 100%, що у об'єкті буде саме те значення, яке нам потрібно
+
+// const hearts = document.querySelectorAll('.heart');
+
+// hearts.forEach((heart)=>{
+//     if(heart.matches('[data-special="special"]'))
+//         console.log('match!');
+// }); //matches дозволяє перевірити елемент на конкретні селектори, як приклад на дата атрибут, чи можна за id
+
+// const proArt = document.querySelector('.pro-art');
+// console.log(proArt.closest('.heart')); // closest Дозволяє визначити батьківський елемент за селектором рекурсивно
+
+
+// const user = {
+//     name: 'Mycola',
+//     age: 22,
+//     [Symbol('id')]: 1,
+//     [Symbol('login')]: 'qunt',
+//     [Symbol('id')]: 1,
+// }
+// user[Object.getOwnPropertySymbols(user)[2]] = 3;
+// console.log(user[Object.getOwnPropertySymbols(user)[2]]);
+//Завдяки Symbol можна створити такі властивості, значення який не можна буде змінити. Завдяки Object.getOwnPropertySymbols() - можна отримати масив з символів об'єкта та отримати доступ до значення символу
+
+// const user = {
+//     name: 'Mycola',
+//     age: 22,
+//     id: 1,
+//     rules: 'none',
+//     invitedBy: 314 
+// }
+
+
+
+// Object.defineProperty(user, 'id', {writable: false}); 
+// Object.defineProperty(user, 'date', {value: new Date(), writable: false, enumerable: false, configurable: true});
+// Object.defineProperties(user, {
+//     rules: {writable: false, configurable: false},
+//     invitedBy: {writable: false, configurable: false}
+// });
+// try {
+//     Object.defineProperties(user, {
+//         rules: {writable: true},
+//         invitedBy: {writable: true, configurable: true}
+//     });
+// } catch (error) {
+//     console.log(error);
+// }
+// видасть помилку, бо у user.rules та user.invitedBy - флаги configurable: false
+//Завдяки Object.defineProperty() можемо зазначити флаги властивості. Зробити її writable (доступною(або не) до перезапису)), enumerable - чи буде властивість відображатись, якщо перерахувати властивості у циклі, configurable - чи можна буде у подальшому змінити флаги властивості. Також працює для методів
+//Завдяки Object.defineProperties() - можна одразу визначити флаги до кількох властивостей або методів
+// try {
+//     user.id = 2;
+// } catch (error) {
+//     console.log(error); 
+// }
+// видасть помилку, бо user.id тепер writable = false
+// for(let i in user) {
+//     console.log(`user.${i}:${user[i]}`); 
+// }
+// не відобразить user.date, бо воно enumerable = false
+// console.log(Object.getOwnPropertyDescriptors(user)); 
+// Завдяки Object.getOwnPropertyDescriptors() - можна відобразити влаги усіх властивостей, Object.getOwnPropertyDescriptor() - відобразить флаги конкретної властивості
+// console.log(Object.keys(user)); 
+// Object.keys() - повертає масив з ключів об'єкта
+// console.log(Object.values(user)); 
+// Object.values() - повертає масив з значень об'єкта
+// console.log(Object.entries(user)); 
+// Object.entries() - повертає масив з масивів (матрицю), які складаються з ключів та їх значень об'єкта
+//Object.keys(), Object.values(), Object.entries() - відображають тільки enumerable = true властивості
+// Object.preventExtensions(user); 
+// Забороняємо "розширення" об'єкта, додавання нових властивостей, методів. Все ще можна видаляти, змінювати поточні об'єкти
+// Object.seal(user); 
+// Забороняємо розширення, або видалення властивостей, забороняємо конфігурацію флагів властивостей, але залишається дозвіл на зміну значень у поточних властивостей
+// Object.freeze(user); 
+// Забороняємо будь яку подальшу зміну об'єкту - додавання, видалення, зміну властивостей та методів
+
+
+//Про ітеровані об'єкти
+// let salaries = {
+//     kyrylo: 500,
+//     liudmyla: 1000,
+//     mycola: 2000,
+//     sergiy: 3000,
+// }
+// за умовчки, створений об'єкт не є ітерованим
+// const refference = 'refference';
+// Об'єкт строка, масив, або DOM colection - є ітерованим об'єктом
+// for(let i in salaries) {
+//     console.log(i);
+// } 
+// цикл for in працює з ключами об'єктів, а тому не забезпечує гарантовану послідовність виводу
+// for(let i of refference) {
+//     console.log(i);
+// }
+// цикл for of працює саме зі значеннями об'єктів, а тому забезпечує гарантовану послідовність
+// try {
+//     for(let i of salaries) {
+//         console.log(i);
+//     }
+// } catch (error) {
+//     console.log(error);
+// }
+// Але for of через це не працює з не ітерованими об'єктами
+// salaries[Symbol.iterator] = function () {
+//     return {
+//         current: Object.values(this)[0],
+//         last: Object.values(this)[Object.values(this).length-1],
+//         values: Object.values(this),
+//         next() {
+//             for(let i in this.values) {
+//                 if(this.current == this.values[i] && this.current != this.last){
+//                     this.current = this.values[(parseInt(i)+1).toString()];
+//                     return {done: false, value: this.values[i]};
+//                 } else {
+//                     if(this.current == this.last) {
+//                         return {done: true};
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
+// Щоби забезпечити ітерованість об'єкту, треба визначити у ньому символ-ітератор [Symbol.iterator] - це функція, яка повератає об'єкт з інформацією про теперешнє та останнє значення ітерації, та метод next, який повертає об'єкт зі станом ітерації done: false чи done: true (закінчився перебір, чи ні), та значення на даному значення на теперішньому етапі ітерації. Можна визначити логіку, за якою повертатимуться значення
+// for(let i of salaries) {
+//     console.log(i);
+// }
+// тут ми забезпечили ітерованість об'єкту salaries, тепер його значення виводяться послідовно
+
+// let map = new Map([
+//     [{name: 'Roman', surname: 'Savranskyi', position: 'Full-stack'}, {salary: 0, reputation: 2000}],
+//     [{name: 'France', surname: 'DeLaZhop', position: 'Mega-stack'}, {salary: 100000, reputation: 200}]
+// ]);
+//Map - це така структура, яка навідмінно від об'єктів, як ключ може мати будь який тип даних, у тому чилі і масив і об'єкт та числа, і відповідні значення. Але по факту, треба розуміти, що всередині - це масиви у масиві, просто обгорнуті у зручну структуру з зручними методами, те що, це так, можна зрозуміти по тому, як можна задалегіть додати стартові елементи до мапи.
+// map.set({name: 'Liudmyla', surname: 'Yakimova', position: 'Designer'}, {salary: 400, reputation: 1200})
+//    .set({name: 'Kyrylo', surname: 'Bashkan', position: 'Front-end'}, {salary: 400, reputation: 900});
+//Завдяки методу .set() - можна записати у мапу нову пару - ключ: значення, метод повертає нову Map з доданими ключом та значенням
+// for(let [person, kpi] of map) {
+//     console.log(person, ' ', kpi);
+//     console.log(map.get(person));
+//     console.log(map.has(person));
+// }
+//Тут можна зрозуміти кілька моментів: 1. Map - це ітерований об'єкт, який забезпечує послідовність при виводі та запису, його можна перебрати через for of. 2. При переборі через for of можна провести деструктурізацію, щоби розділити ключ: значення та звертатись до них по окремості. 3. метод .get дозволяє отримати значення, якщо вказати відповідний ключ, повертає його значення у Map 4.Метод .has дозволяє перевірити, чи існує такий ключ у Map, повертає true, або false
+// map.size
+//Повертає кількість елементів у мапі
+// map.keys();
+// map.values();
+// map.entries();
+//По аналогії з методами, як у Object - keys - повертає масив ключей у мапи, values - повертає масив зі значень мапи, entries - повертає масив з масивів, в яких перший елемент - ключ, другий - значення (по факту, повертає реальний вигляд мапи)
+// map.delete({name: 'Kyrylo', surname: 'Bashkan', position: 'Front-end'});
+//По вказаному ключу, дозволяє видалити відповідний елемент мапи
+// map.clear();
+//Повністю видаляє усі елементи мапи
+
+// let mass = [1, 2, 7, 7, 3, 3, 4, 7, 4, 2, 3, 'прийом', 'алерт', 'прийом'];
+// let set = new Set(mass);
+// set.add(3);
+// set.delete(1);
+// set.has('прийом');
+// set.size;
+// set.clear();
+//Set - це ітерований об'єкт, який може мати тільки не повторювальні дані. Дуже зручно, коли стоїть задача - створити список не повторювальних даних з потенційно повторювальних даних. По аналогії з Map має багато спільних та зручних методів
+
+// let bigNum = BigInt(2284682746287462874628746287462874628746824628746387648273469283746289734);
+// let bigNum2 = 2894820768375628974950393589587439573984759387459834587364597863458976345353543534534534539475098743530985738756n;
+
+// console.log(bigNum2, bigNum, bigNum2/bigNum);
+// Для роботи з великими числами, які більше за 9007199254740991 (це 2^53-1) Потрібно ковертувати значення у BigInt. Або завдяки функції BigInt(), або через додавання n наприкінці числа. Використовувати в одній операції одночасно  BigInt та Number - неможливо, для цього Number треба конвертувати у BigInt. BigInt можна конвертувати у number через Number(), але якщо число більше за 9007199254740991, то уся та частина, що перебільшує максимальне значення number, буде відкинута. BigInt також не можна використовувати у бібліотеці Math для розрахунків, але можна проводити розрахунки завдяки + - * /(ділення BigInt завжди повертає округлений результат) % **
+
+// function amountOfPages(summary){
+//     let count = 0,
+//     pages = '';
+//     while (pages.length < summary) {
+//         count++
+//         pages += count + 1;
+//     }
+//     return count;
+// }
+
+// console.log(amountOfPages(5));
+// console.log(amountOfPages(25));
+// console.log(amountOfPages(1095));
+// console.log(amountOfPages(185));
+
+// function test (string) {
+//     if(new Set(string.split(' ').join('').split('.').join('').split(',').join('').toLowerCase()).size === 26) {
+//         return true;
+//     } else {
+//         return new Set(string.split(' ').join('').split('.').join('').split(',').join('').toLowerCase());
+//     }
+// }
+// console.log(test('The quick brown fox jumps over the lazy dog'));
+// console.log(test('Mr. Jock, TV quiz PhD., bags few lynx.'));
+// console.log(test('Two driven jocks help fax my big quiz.'));
+
+
+// function deepCount(a){
+//     let count = 0;
+//     for(let i = 0; i < a.length; i++) {
+//         if(Array.isArray(a[i])) {
+//             count += deepCount(a[i]);
+//         }
+//         count++;
+//     }
+//     return count;
+// }
+
+// const buttons = document.querySelectorAll('button'),
+//       wrapper = document.querySelector('.wrapper');
+
+// wrapper.addEventListener('click', (e)=> {
+//     if(e.target && e.target.matches('button')) {
+//         e.target.style.background = 'green';
+//     }
+// });
+//Делегіювання події - коли в нас є кілька елементів, в одному спільному батьківському елементі, подія яких повинна виконувати одну і ту саму дію, як приклад, кілька кнопок у одному елементі, які повинні робити одну і ту саму дію. То замість того, щоб вішати прослуховувач на кожну, краще повісити EventListener на їх батьківський елемент і перевіряти, чи виконана подія пов'язана саме с подрібними елементами.
