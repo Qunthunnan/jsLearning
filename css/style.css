@@ -84,3 +84,23 @@ button {
 	color: #fff;
 }
 
+.container {
+   display: flex;
+   justify-content: space-around;
+ }
+ 
+ .block {
+   flex: 1;
+   padding: 10px;
+   border: 1px solid #ddd;
+   width: 320px;
+   /* Якщо потрібно вирівнювати по горизонталі: */
+   display: flex;
+   flex-direction: column;
+ }
+ 
+ /* Визначте стилі для вашого контенту в блоках, якщо необхідно */
+ .block p {
+   margin: 0;
+ }
+

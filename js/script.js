@@ -1556,54 +1556,54 @@
 // });
 //MutationObserver може спостерігати за змінами у елементі. У цьому випадку ми відслідковуємо та обробляємо додавання, або видалення чайлд ноди (тексту або елементу), також є ResizeObserver та intersectionObserver
 
-class User {
-    constructor(id, name, rules) {
-        this.id = id;
-        this.name = name;
-        this.rules = rules;
-    }
+// class User {
+//     constructor(id, name, rules) {
+//         this.id = id;
+//         this.name = name;
+//         this.rules = rules;
+//     }
 
-    getName () {
-        return this.name;
-    }
+//     getName () {
+//         return this.name;
+//     }
 
-    setRules (rules) {
-        this.rules = rules;
-    }
+//     setRules (rules) {
+//         this.rules = rules;
+//     }
 
-    showUser () {
-        console.log(this);
-    }
-}
+//     showUser () {
+//         console.log(this);
+//     }
+// }
 
-class SuperUser extends User{
-    constructor (id, name, rules, sword) {
-        super(id, name, rules);
+// class SuperUser extends User{
+//     constructor (id, name, rules, sword) {
+//         super(id, name, rules);
 
-        this.sword = sword;
-    }
+//         this.sword = sword;
+//     }
 
-    killUser(user) {
-        try {
-            user.getName();
-            console.log(`God ${this.name} killed ${user.name} by ${this.sword} !!!`);
-            user.name = null;
-            user.id = null;
-            user.rules = null;
-            user = null;
-        } catch (error) {
-            console.error(error);
-        }
-    }
-}
+//     killUser(user) {
+//         try {
+//             user.getName();
+//             console.log(`God ${this.name} killed ${user.name} by ${this.sword} !!!`);
+//             user.name = null;
+//             user.id = null;
+//             user.rules = null;
+//             user = null;
+//         } catch (error) {
+//             console.error(error);
+//         }
+//     }
+// }
 
-let kyrylo = new User (1, 'Kyrylo', 'god');
-let liudmyla = new SuperUser(1, 'Liudmyla', 'megatron', 'penis');
-console.log(kyrylo.getName());
-kyrylo.setRules('supergod');
-kyrylo.showUser();
-liudmyla.killUser(kyrylo);
-console.log(kyrylo);
+// let kyrylo = new User (1, 'Kyrylo', 'god');
+// let liudmyla = new SuperUser(1, 'Liudmyla', 'megatron', 'penis');
+// console.log(kyrylo.getName());
+// kyrylo.setRules('supergod');
+// kyrylo.showUser();
+// liudmyla.killUser(kyrylo);
+// console.log(kyrylo);
 //Після впровадження стандарту ES6 функції-конструктори тепер можуть бути написані у вигляді класів. Це по суті ситаксичний цукор, бо всередині вони все одно працюють, як функції-конструктори, але працювати з класами зручніше. Також можна наслідувати класи, наслідування відбувається завдяки extends і у конструкторі класу викликається функція super(), у яку передаються аргументи для конструктора класу, який наслідується. super() якщо потрібен, обов'язково викликається в першій строчці конструктора
 
 //Конекст виклику this
@@ -1613,22 +1613,44 @@ console.log(kyrylo);
 //5.У addEventListener якщо передати функцію у класичному записі з function element.addEventListener('click', function (e) {return this}); - то this у такому випадку поверне елемент, на якому спрацювала подія, тобто e.target, але якщо передати анонімну функцію, то вона нічого не поверне Window або undefined, бо у анонімної функції нема свого контексту виклику
 
 // Також функції можна присвоїти контекст виклику
-function testThis (test, test2) {
-    console.log(test, test2, this.context);
-}
-const testObj = {
-    context: 'what?'
-}
+// function testThis (test, test2) {
+//     console.log(test, test2, this.context);
+// }
+// const testObj = {
+//     context: 'what?'
+// }
 //call та apply роблять однакові речі, просто якщо річ заходить про кількість аргументів > 1, то ці два методи по різному приймають ці аргументи
-testThis.call(testObj, 'puk: ', '232'); 
-testThis.apply(testObj, ['pin: ', '2480']);
+// testThis.call(testObj, 'puk: ', '232'); 
+// testThis.apply(testObj, ['pin: ', '2480']);
 //також можна створити нову функцію на основі іншої функції, присвоївши їх новий контекст виклику
-const actions = {
-    action1: 'п\'є пиво'
-}
-function batya () {
-    console.log(`Батя ${this.action1}`);
-}
+// const actions = {
+//     action1: 'п\'є пиво'
+// }
+// function batya () {
+//     console.log(`Батя ${this.action1}`);
+// }
 
-const newBatya = batya.bind(actions);
-newBatya();
+// const newBatya = batya.bind(actions);
+// newBatya();
+
+//rest оператор дозволяє записати усі інші аргументи функції у окремий масив для подальшої обробки
+function sum (a, b, c, ...restNums) {
+    let sum = a + b + c;
+    for (let num of restNums) {
+        sum+=num;
+    }
+    return sum;
+}
+console.log(sum(24,23,33,56,7,8,85,86,889,3,4));
+//
+function sum2 (a, b, operation = '+') {
+    switch (operation) {
+        case '+':
+            return a + b;
+        case '*':
+            return a * b;
+        case '/':
+            return a / b;
+    }
+}
+console.log(sum2(1,2));
