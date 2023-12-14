@@ -1527,16 +1527,108 @@
 // });
 //Делегування події - коли в нас є кілька елементів, в одному спільному батьківському елементі, подія яких повинна виконувати одну і ту саму дію, як приклад, кілька кнопок у одному елементі, які повинні робити одну і ту саму дію. То замість того, щоб вішати прослуховувач на кожну, краще повісити EventListener на їх батьківський елемент і перевіряти, чи виконана подія пов'язана саме с подрібними елементами.
 
-const box = document.querySelector('.box'),
-      boxProps = {
-        cWidth: box.clientWidth, 
-        cHeight: box.clientHeight,
-        oWidth: box.offsetWidth,
-        oHeight: box.offsetHeight,
-        sWidth: box.scrollWidth,
-        sHeight: box.scrollHeight,
-        coords: box.getBoundingClientRect(),
-        styles: getComputedStyle(box),
-      }
-//Ді властивості та методи дозволяють отримати різні характеристики DOM елемента. clientWidth - не буде враховувати системні елементи, такі як системний скролл бар, а також не враховуватиме padding, якщо не стоїть box-sizing: border-box
-      console.dir(boxProps);
+// const box = document.querySelector('.box'),
+//       boxProps = {
+//         cWidth: box.clientWidth, 
+//         cHeight: box.clientHeight,
+//         oWidth: box.offsetWidth,
+//         oHeight: box.offsetHeight,
+//         sWidth: box.scrollWidth,
+//         sHeight: box.scrollHeight,
+//         coords: box.getBoundingClientRect(),
+//         styles: getComputedStyle(box),
+//       }
+//Ді властивості та методи дозволяють отримати різні характеристики DOM елемента. clientWidth - не буде враховувати системні елементи, такі як системний скролл бар, а також не враховуватиме padding. offsetWidth - виведе саме те значення, яке вказане у css. scrollWidth - виведе повний розмір елементу, включно з усім контентом, який вкладається у overflow: scroll. 
+//getBoundingClientRect - метод дозволяє отримати координати елементу у document, усі координати орієнтуються відносно лівого верхнього кута, навіть bottom та right
+//getComputedStyle функція повертає об'єкт з усіма стилями елемента
+// const viewPosition = document.documentElement.scrollTop;
+//document.documentElement.scrollTop - таким чином можна отримати позицію прокрутки сторінки користувачем. Також, якщо задати це значення, то можна маніпулювати позицією перегляду клієта
+// window.scrollBy(0, 400);
+// window.scrollTo(0, 400);
+//Можна також прокручувати сторінку у користувача
+
+// const element = document.querySelector('.element')
+// const observer = new MutationObserver(mutationRecords => {
+//     console.log('action');
+// });
+// observer.observe(element, {
+//     childList: true
+// });
+//MutationObserver може спостерігати за змінами у елементі. У цьому випадку ми відслідковуємо та обробляємо додавання, або видалення чайлд ноди (тексту або елементу), також є ResizeObserver та intersectionObserver
+
+class User {
+    constructor(id, name, rules) {
+        this.id = id;
+        this.name = name;
+        this.rules = rules;
+    }
+
+    getName () {
+        return this.name;
+    }
+
+    setRules (rules) {
+        this.rules = rules;
+    }
+
+    showUser () {
+        console.log(this);
+    }
+}
+
+class SuperUser extends User{
+    constructor (id, name, rules, sword) {
+        super(id, name, rules);
+
+        this.sword = sword;
+    }
+
+    killUser(user) {
+        try {
+            user.getName();
+            console.log(`God ${this.name} killed ${user.name} by ${this.sword} !!!`);
+            user.name = null;
+            user.id = null;
+            user.rules = null;
+            user = null;
+        } catch (error) {
+            console.error(error);
+        }
+    }
+}
+
+let kyrylo = new User (1, 'Kyrylo', 'god');
+let liudmyla = new SuperUser(1, 'Liudmyla', 'megatron', 'penis');
+console.log(kyrylo.getName());
+kyrylo.setRules('supergod');
+kyrylo.showUser();
+liudmyla.killUser(kyrylo);
+console.log(kyrylo);
+//Після впровадження стандарту ES6 функції-конструктори тепер можуть бути написані у вигляді класів. Це по суті ситаксичний цукор, бо всередині вони все одно працюють, як функції-конструктори, але працювати з класами зручніше. Також можна наслідувати класи, наслідування відбувається завдяки extends і у конструкторі класу викликається функція super(), у яку передаються аргументи для конструктора класу, який наслідується. super() якщо потрібен, обов'язково викликається в першій строчці конструктора
+
+//Конекст виклику this
+//1.Якщо викликати this у звичайній функції, то конекст виклику буде window (глобальний загальний об'єкт DOM), або якщо увімкнений "use strict", то undefined, бо у функції нема контексту виклику  
+//2.this у об'єкті поверне сам об'єкт, також this у методі об'єкта також поверне об'єкт цього методу, але this у функції, яка всередині методу о'єкта поверне, як і звичайна функція Window або undefined, АЛЕ якщо функцію у методі викликати саме як АНОНІМНУ функцію, то this у цій функції поверне як раз об'єкт, тому що анонімні функції не мають свого контексту виклику і вони беруть його саме з того місця, де були викликані, а саме з методу, чий контекст виклику саме об'єкт цього методу
+//3.this у консрукторах повертає новий екземляр об'єкту
+//5.У addEventListener якщо передати функцію у класичному записі з function element.addEventListener('click', function (e) {return this}); - то this у такому випадку поверне елемент, на якому спрацювала подія, тобто e.target, але якщо передати анонімну функцію, то вона нічого не поверне Window або undefined, бо у анонімної функції нема свого контексту виклику
+
+// Також функції можна присвоїти контекст виклику
+function testThis (test, test2) {
+    console.log(test, test2, this.context);
+}
+const testObj = {
+    context: 'what?'
+}
+//call та apply роблять однакові речі, просто якщо річ заходить про кількість аргументів > 1, то ці два методи по різному приймають ці аргументи
+testThis.call(testObj, 'puk: ', '232'); 
+testThis.apply(testObj, ['pin: ', '2480']);
+//також можна створити нову функцію на основі іншої функції, присвоївши їх новий контекст виклику
+const actions = {
+    action1: 'п\'є пиво'
+}
+function batya () {
+    console.log(`Батя ${this.action1}`);
+}
+
+const newBatya = batya.bind(actions);
+newBatya();
