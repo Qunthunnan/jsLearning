@@ -1693,49 +1693,51 @@
 //Promise
 
 
-const request = new Promise((resolve)=>{
-    let result = {};
-    result.name = 'Liudmyla';
-    console.log(result);
-    resolve(result);
-});
+// const request = new Promise((resolve)=>{
+//     let result = {};
+//     result.name = 'Liudmyla';
+//     console.log(result);
+//     resolve(result);
+// });
 
-let test = '1111';
-console.log(test);
+// let test = '1111';
+// console.log(test);
 
-request.then((result)=>{
-    return new Promise((resolve) => {
-        setTimeout(()=>{
-            result.surname = 'Yakimova';
-            console.log(result);
-            resolve(result);
-        },2000);
-    });
-}).then(result => { 
-    return new Promise((resolve, reject)=>{
-        setTimeout(()=>{
-            let chanse = Math.floor(Math.random()* 10 - 1 + 1) + 1;
-            console.log(chanse);
-            if(chanse % 2 == 0) {
-                result.status = true;
-                console.log(result);
-                resolve(result);
-            } else {
-                result.status = false;
-                result.cash = '0$';
-                console.log(result);
-                reject(result);
-            }
-        }, 2000);
-    });
-}).then(result => {
-    result.cash = '2000$';
-    console.log(result);
-}).catch(() => {
-    console.log('Або щось пішло не так, або не пощастило десь..');
-}).finally(()=> {
-    console.log('У будь якому разі, щось виконається наприкинці');
-});
+// request.then((result)=>{
+//     return new Promise((resolve) => {
+//         setTimeout(()=>{
+//             result.surname = 'Yakimova';
+//             console.log(result);
+//             resolve(result);
+//         },2000);
+//     });
+// }).then(result => { 
+//     return new Promise((resolve, reject)=>{
+//         setTimeout(()=>{
+//             let chanse = Math.floor(Math.random()* 10 - 1 + 1) + 1;
+//             console.log(chanse);
+//             if(chanse % 2 == 0) {
+//                 result.status = true;
+//                 console.log(result);
+//                 resolve(result);
+//             } else {
+//                 result.status = false;
+//                 result.cash = '0$';
+//                 console.log(result);
+//                 reject(result);
+//             }
+//         }, 2000);
+//     });
+// }).then(result => {
+//     result.cash = '2000$';
+//     console.log(result);
+// }).catch(() => {
+//     console.log('Або щось пішло не так, або не пощастило десь..');
+// }).finally(()=> {
+//     console.log('У будь якому разі, щось виконається наприкинці');
+// });
 // Завдяки промісам ми можемо задавати послідовність виконання, без розростання вкладеності коду. У проміс при створенні ми вказуємо функцію, у яку можемо передати аргументи resolve reject - це функції, які можна викликати у разі успішного виконання промісу, або не успішного. Ці функції можна викликати у самому промісі, наприклад при успішному виконанні якоїсь логіки - викликати resolve(), а якщо не успішно reject(). reject також спрацьовує, коли у промісі катчиться якась помилка.(тобто є вбудований try catch)
 //За для зазначення функції resolve, до об'экту Promise застосовується метод .then(), у який передається функція, яка повинна виконатись при виклиці resolve(), для reject() застосовується метод .catch(), який зазвичай використовується наприкінці, після усіх .then(). Якщо десь у промісі був виконаний reject(), або скатчена помилка, то усі наступні .then() не спрацьовуватимуть. Для того, щоби задати якусь функцію, яка виконається у будь якому разі, навіть при .catch() наприкинці, то застосовується метод .finally() у який так само передається необхідна функція
 //Сам проміс починає виконуватись одразу після створення, але якщо зени та інші методі не були застосовані, то вони спрацюють тоді, коли їх застосують до об'єкту
+//Також є додаткові методі до класу Promise - Promise.all() та Promise.race(). Вони приймають масив з промісів. Promise.all() - після виконання усіх промісів у масиві, може виконати доданий до нього .then(). Promise.race() може виконати .then(), коли виконається перший проміс
+
