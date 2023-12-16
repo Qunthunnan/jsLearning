@@ -1634,23 +1634,108 @@
 // newBatya();
 
 //rest оператор дозволяє записати усі інші аргументи функції у окремий масив для подальшої обробки
-function sum (a, b, c, ...restNums) {
-    let sum = a + b + c;
-    for (let num of restNums) {
-        sum+=num;
-    }
-    return sum;
-}
-console.log(sum(24,23,33,56,7,8,85,86,889,3,4));
-//
-function sum2 (a, b, operation = '+') {
-    switch (operation) {
-        case '+':
-            return a + b;
-        case '*':
-            return a * b;
-        case '/':
-            return a / b;
-    }
-}
-console.log(sum2(1,2));
+// function sum (a, b, c, ...restNums) {
+//     let sum = a + b + c;
+//     for (let num of restNums) {
+//         sum+=num;
+//     }
+//     return sum;
+// }
+// console.log(sum(24,23,33,56,7,8,85,86,889,3,4));
+//Завдяки ES6 можна виставити значення аргументу за умовчки на випадок, якщо воно не буде вказано при виклику функції
+// function sum2 (a, b, operation = '+') {
+//     switch (operation) {
+//         case '+':
+//             return a + b;
+//         case '*':
+//             return a * b;
+//         case '/':
+//             return a / b;
+//     }
+// }
+// console.log(sum2(1,2));
+
+// function getSum(a, b) {
+//     function sum() {
+//         console.log(this.a);
+//         return a + b;
+//     }
+ 
+//     console.log(sum());
+// }
+ 
+// getSum(4, 5);
+
+//Cтарий спосіб зробити http запит
+// const request = new XMLHttpRequest(); 
+//створили об'єкт запиту
+// request.open('GET', 'js/test.json'); 
+//встановили метод та шлях запиту
+// request.setRequestHeader('Content-type', 'application/json; charset=utf-8'); 
+//встановили тип формату даних, спілкування з сервером
+// request.send();
+//відправили запит
+// request.addEventListener('load', ()=> {
+//     if(request.status === 200) {
+//         let result = JSON.parse(request.response);
+//         result.forEach(element => {
+//             console.log(element);
+//         });
+//         console.log(result[3].email);
+//         console.log(result[2].timestamp, new Date(result[2].timestamp*1000));
+//     } else {
+//         console.log(`response status: `, response.status);
+//     }
+// });
+//прослуховуємо отримання запиту через подію load, можна перевіряти статус запиту request.status. У request.response буде відповідь у форматі строки Json, яку треба конвертувати у об'єкт завдяки JSON.parse(), якщо потрібно зробити POST запит та конвертувати об'єкт у Json, то для цього використовується JSON.stringify() також завдяки цим методам JSON.parse(JSON.stringify(obj)); можна рекурсивно повністю склонувати об'єкт.
+// Окрім властивості status та response, є також statusText та readyState, та ще кілька інших. Окрім Json формату, існують також XML та form-data. XML формат - це відображення об'єкту у форматі, де назви тегів - ключі, а вміст у тегах - значення (зараз рідко використовується через наватаженість запиту в порівнянні з Json). form-data використовується у випадку HTML форми, у баді запиту передається об'єкт FormData, який сворюється з DOM елементу форми, яку відправляють, ключами у form-data виступають значення атрибутів name у інпутах, а значеннями - value інпутів з відповідними name. Тому при верстці по стандарту для кожного input варто вказувати атрибут name. Якщо використовувати цей старий спосіб XMLHttpRequest() з form-data, то вказувати .setRequestHeader - не треба 
+
+//Promise
+
+
+const request = new Promise((resolve)=>{
+    let result = {};
+    result.name = 'Liudmyla';
+    console.log(result);
+    resolve(result);
+});
+
+let test = '1111';
+console.log(test);
+
+request.then((result)=>{
+    return new Promise((resolve) => {
+        setTimeout(()=>{
+            result.surname = 'Yakimova';
+            console.log(result);
+            resolve(result);
+        },2000);
+    });
+}).then(result => { 
+    return new Promise((resolve, reject)=>{
+        setTimeout(()=>{
+            let chanse = Math.floor(Math.random()* 10 - 1 + 1) + 1;
+            console.log(chanse);
+            if(chanse % 2 == 0) {
+                result.status = true;
+                console.log(result);
+                resolve(result);
+            } else {
+                result.status = false;
+                result.cash = '0$';
+                console.log(result);
+                reject(result);
+            }
+        }, 2000);
+    });
+}).then(result => {
+    result.cash = '2000$';
+    console.log(result);
+}).catch(() => {
+    console.log('Або щось пішло не так, або не пощастило десь..');
+}).finally(()=> {
+    console.log('У будь якому разі, щось виконається наприкинці');
+});
+// Завдяки промісам ми можемо задавати послідовність виконання, без розростання вкладеності коду. У проміс при створенні ми вказуємо функцію, у яку можемо передати аргументи resolve reject - це функції, які можна викликати у разі успішного виконання промісу, або не успішного. Ці функції можна викликати у самому промісі, наприклад при успішному виконанні якоїсь логіки - викликати resolve(), а якщо не успішно reject(). reject також спрацьовує, коли у промісі катчиться якась помилка.(тобто є вбудований try catch)
+//За для зазначення функції resolve, до об'экту Promise застосовується метод .then(), у який передається функція, яка повинна виконатись при виклиці resolve(), для reject() застосовується метод .catch(), який зазвичай використовується наприкінці, після усіх .then(). Якщо десь у промісі був виконаний reject(), або скатчена помилка, то усі наступні .then() не спрацьовуватимуть. Для того, щоби задати якусь функцію, яка виконається у будь якому разі, навіть при .catch() наприкинці, то застосовується метод .finally() у який так само передається необхідна функція
+//Сам проміс починає виконуватись одразу після створення, але якщо зени та інші методі не були застосовані, то вони спрацюють тоді, коли їх застосують до об'єкту
