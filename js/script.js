@@ -1741,59 +1741,119 @@
 //Сам проміс починає виконуватись одразу після створення, але якщо зени та інші методі не були застосовані, то вони спрацюють тоді, коли їх застосують до об'єкту
 //Також є додаткові методі до класу Promise - Promise.all() та Promise.race(). Вони приймають масив з промісів. Promise.all() - після виконання усіх промісів у масиві, може виконати доданий до нього .then(). Promise.race() може виконати .then(), коли виконається перший проміс
 
-const films = [
-    {
-        name: 'Titanic',
-        rating: 9
-    },
-    {
-        name: 'Die hard 5',
-        rating: 5
-    },
-    {
-        name: 'Matrix',
-        rating: 8
-    },
-    {
-        name: 'Some bad film',
-        rating: 4
-    }
-];
+// const films = [
+//     {
+//         name: 'Titanic',
+//         rating: 9
+//     },
+//     {
+//         name: 'Die hard 5',
+//         rating: 5
+//     },
+//     {
+//         name: 'Matrix',
+//         rating: 8
+//     },
+//     {
+//         name: 'Some bad film',
+//         rating: 4
+//     }
+// ];
 
-function showGoodFilms(arr) {
-    const result = arr
-    .map(item => Object.entries(item))
-    .filter(item => item[1][1] >= 8)
-    .map(item => Object.fromEntries(item));
-    return result;
-}
+// function showGoodFilms(arr) {
+//     const result = arr
+//     .map(item => Object.entries(item))
+//     .filter(item => item[1][1] >= 8)
+//     .map(item => {
+//         let obj = {}
+//         item.forEach(mas => {
+//             obj[`${mas[0]}`] = mas[1];
+//         });
+//         return obj;
+//     });
+//     return result;
+// }
 
-function showListOfFilms(arr) {
-    const result = arr
-    .map(item => Object.entries(item)[0][1])
-    .join(', ');
-    return result;
-}
+// function showListOfFilms(arr) {
+//     const result = arr
+//     .map(item => Object.entries(item)[0][1])
+//     .join(', ');
+//     return result;
+// }
 
-function setFilmsIds(arr) {
-    let result = arr
-    .map(item => Object.entries(item))
-    .map((item, i) => {
-        item[item.length] = ['id', i];
-        return item;
-    })
-    .map(item => Object.fromEntries(item));
-    return result;
+// function setFilmsIds(arr) {
+//     let result = arr
+//     .map(item => Object.entries(item))
+//     .map((item, i) => {
+//         item[item.length] = ['id', i];
+//         return item;
+//     })
+//     .map(item => {
+//         let obj = {}
+//         item.forEach(mas => {
+//             obj[`${mas[0]}`] = mas[1];
+//         });
+//         return obj;
+//     });
+//     return result;
+
+
     // .map((item, i) => {return {...item, 'id': i}});
     // return result;
-}
 
-console.log(setFilmsIds(films));
-const tranformedArray = setFilmsIds(films);
+    
+// }
 
-function checkFilms(arr) {
-    let buffer = arr;
-    return buffer
-    .map(item => Object.keys(item))
-    .every(item => item[2] === 'id');
-}
+
+// const tranformedArray = setFilmsIds(films);
+
+// function checkFilms(arr) {
+//     let buffer = arr;
+//     return buffer
+//     .map(item => Object.keys(item))
+//     .every(item => item[2] === 'id');
+// }
+
+// const funds = [
+//     {amount: -1400},
+//     {amount: 2400},
+//     {amount: -1000},
+//     {amount: 500},
+//     {amount: 10400},
+//     {amount: -11400}
+// ];
+
+// const getPositiveIncomeAmount = (data) => {
+//     let result = [];
+//     data.forEach(magazine => {
+//         result.push(magazine);
+//     });
+//     return result
+//     .filter(item => item['amount'] > 0)
+//     .map(item => item['amount'])
+//     .reduce((sum, curent) => sum + curent);
+// };
+
+// const getTotalIncomeAmount = (data) => {
+//     if(data.every(item => item['amount'] > 0)) {
+//         return getPositiveIncomeAmount(data);
+//     } else {
+//         let result = [];
+//         data.forEach(magazine => {
+//             result.push(magazine);
+//         });
+//         return result
+//         .map(item => item['amount'])
+//         .reduce((sum, curent) => sum + curent);
+//     }
+// };
+
+// console.log(getPositiveIncomeAmount(funds));
+let arr = [];
+arr.filter(item => item > 5)
+arr.map(item => item = 5)
+
+// Усі основні методи перебору масивів 
+// Filter arr.filter(item => item > 5) - повертає новий масив зі значеннями, які відповідають умові
+// Map arr.map(item => item = 5) 
+
