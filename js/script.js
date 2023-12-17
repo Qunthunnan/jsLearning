@@ -1741,3 +1741,59 @@
 //Сам проміс починає виконуватись одразу після створення, але якщо зени та інші методі не були застосовані, то вони спрацюють тоді, коли їх застосують до об'єкту
 //Також є додаткові методі до класу Promise - Promise.all() та Promise.race(). Вони приймають масив з промісів. Promise.all() - після виконання усіх промісів у масиві, може виконати доданий до нього .then(). Promise.race() може виконати .then(), коли виконається перший проміс
 
+const films = [
+    {
+        name: 'Titanic',
+        rating: 9
+    },
+    {
+        name: 'Die hard 5',
+        rating: 5
+    },
+    {
+        name: 'Matrix',
+        rating: 8
+    },
+    {
+        name: 'Some bad film',
+        rating: 4
+    }
+];
+
+function showGoodFilms(arr) {
+    const result = arr
+    .map(item => Object.entries(item))
+    .filter(item => item[1][1] >= 8)
+    .map(item => Object.fromEntries(item));
+    return result;
+}
+
+function showListOfFilms(arr) {
+    const result = arr
+    .map(item => Object.entries(item)[0][1])
+    .join(', ');
+    return result;
+}
+
+function setFilmsIds(arr) {
+    let result = arr
+    .map(item => Object.entries(item))
+    .map((item, i) => {
+        item[item.length] = ['id', i];
+        return item;
+    })
+    .map(item => Object.fromEntries(item));
+    return result;
+    // .map((item, i) => {return {...item, 'id': i}});
+    // return result;
+}
+
+console.log(setFilmsIds(films));
+const tranformedArray = setFilmsIds(films);
+
+function checkFilms(arr) {
+    let buffer = arr;
+    return buffer
+    .map(item => Object.keys(item))
+    .every(item => item[2] === 'id');
+}
