@@ -1851,34 +1851,106 @@
 //reduce - виконує певну сумуючу операцію над усіма елементами у масиві, важливо брати до уваги, що він корректно працює, тільки коли у масиві усі елементи є примітивами, інакше - треба додавати перевірки на примітивність, або заздалегіть перетворити масив на масив з примітивами. У функцію передаються аргументи - початкова сума та поточний елемент. При першій ітерації початкова сумма дорівнується першому елементу, а поточний елемент - другому, при наступних операціях у сумму запишеться результат минулої операції, а в поточний елемент - наступний. Метод повертає усю сумму, що утвориться
 
 //Fetch, async await
-const postData = async (data, url) => {
-    const result = await fetch(url, {
-        headers: {
-            'Content-type': 'application/json'
-        },
-        method: 'POST',
-        body: data,
-    });
-    return await result.json();
-}
-clientForm.addEventListener('submit', (e)=>{
-    e.preventDefault();
-    const userData = new FormData(clientForm);
-    postData(JSON.stringify(Object.fromEntries(userData)), 'http://localhost:3000/requests')
-    .then((response)=>{
-        console.log(response);
-        closeModal(modal, () => {
-            showModal(modalDone);
-        });
-    }).catch(()=>{
-        closeModal(modal, () => {
-            showModal(modalError);
-        });
-        console.error(response);
-    })
-    .finally(()=>{
-        clientForm.reset();
-    });
-});
+// const postData = async (data, url) => {
+//     const result = await fetch(url, {
+//         headers: {
+//             'Content-type': 'application/json'
+//         },
+//         method: 'POST',
+//         body: data,
+//     });
+//     return await result.json();
+// }
+// clientForm.addEventListener('submit', (e)=>{
+//     e.preventDefault();
+//     const userData = new FormData(clientForm);
+//     postData(JSON.stringify(Object.fromEntries(userData)), 'http://localhost:3000/requests')
+//     .then((response)=>{
+//         console.log(response);
+//         closeModal(modal, () => {
+//             showModal(modalDone);
+//         });
+//     }).catch(()=>{
+//         closeModal(modal, () => {
+//             showModal(modalError);
+//         });
+//         console.error(response);
+//     })
+//     .finally(()=>{
+//         clientForm.reset();
+//     });
+// });
 //Приклад коду, того, як можна зробити POST запит на сервер, з використанням методу Fetch на промісах, відправляючи JSON файл з форм дати та використовуючи asyc await, щоби зробити асінхроний код послідовним.
 //Створюємо функцію відправки даних, оголошуючи, що в неї може виконуватись асінхроний код завдяки оператору async. Далі у створену змінну повертаємо результат fetch запиту, при взятті результату оголошуємо оператор await, для того, щоби позначити місце виконання асінхроного коду. Це змушує код зупинитись та чекати виконання fetch. Це потрібно, бо fetch - це метод, який виконується асінхронно і тому без оператора await виконання коду піде далі, що звісно виклече помилки, якщо ми починаємо одразу обробляти результат fetch. У самомму fetch ми вказуємо url, body і якщо ми відправляємо json, то важливо вказати у заголовок запиту 'Content-type': 'application/json'. у результат запишеться відповідь серверу і що  важливо - це буде проміс, який потім ми можемо окрім того, що отримати, також обробити поведінку в залежності від відповіді сервера.
+
+//local storage
+// const signInForm = document.querySelector('.form-signin'),
+//       colorChanger = document.querySelector('#color'),
+//       checkBox = document.querySelector('#checkbox');
+// if(localStorage.getItem('name') && localStorage.getItem('check')) {
+//     signInForm.querySelector('.form-control').value = localStorage.getItem('name');
+//     if(localStorage.getItem('check') === 'on') {
+//         signInForm.querySelector('#checkbox').checked = true;
+//     }
+//     colorChanger.style['background-color'] = localStorage.getItem('color');
+// }
+// colorChanger.addEventListener('click', (e) => {
+//     colorChanger.style['background-color'] = `rgb(${Math.floor(Math.random()*255)}, ${Math.floor(Math.random()*255)}, ${Math.floor(Math.random()*255)})`;
+// });
+// signInForm.addEventListener('submit', (e) => {
+//     e.preventDefault();
+//     const userData = new FormData (signInForm);
+//     const userDataObj = Object.fromEntries(userData.entries());
+//     if (checkBox.checked != true) {
+//         userDataObj['check'] = 'off';
+//     }
+//     userDataObj['color'] = getComputedStyle(colorChanger)['background-color'];
+//     for (let i in userDataObj) {
+//         localStorage.setItem(i, userDataObj[i]);
+//     }
+// });
+///Невеличкий приклад коду роботи з local storage. localstorage - це властивість об'єкту window. В неї можна записувати данні у форматі ключ - значення, може працювати тільки з примітивними даними, об'єкт, або масив записати в якості значення напряму не вийде, їх треба буде розкласти на примітивні данні, або конвертувати у json та записати у вигляді строки (серіалізувати).
+//Ключові методи localstorage - localstorage.getItem('') - приймає у виляди строки ключ, повертає значення цього ключа у localstorage. localStorage.setItem('', value) - приймає ключ і значення, записує їх у localstorage Таким чином можна записати нові, або перезаписати вже існуючі дані. localstorage.clear() - очищає localstorage на сторінці
+
+//Regex регулярні вирази
+let regex = /nig/;
+//у // записується сам патерн, а після записуються додаткові флаги для виразу 
+//Флаги виразів:
+//i - поза регістром
+//g - кілька значень
+//m - багатостроковий режим
+//s - Вмикає режим “dotall”, при якому крапка . може відповідати символу нового рядка \n
+//u - Вмикає повну підтримку Юнікоду. Прапор дозволяє коректну обробку сурогатних пар
+// y - Режим пошуку на конкретній позиції в тексті
+//Їх можна комбінувати let regex = /n123/gim;
+
+//Також є класи регулярних варазів для пошуку
+// \d - усі цифри, або \D усі НЕ цифри
+// \w - усі алфавітні символи (це символи латиської абетки, цифри та _ - нижнє підкреслення), або \W усі НЕ алфавітні символи 
+// \s - усі пробіли, табуляції, символи нового рядка, або \S - навпаки
+// \p{L} - усі алфавітні символи, в тому числі різних мов (працює з флагом u)
+// . - крапка - це відповідає усім символам, окрім перенесення рядка
+// ^ та $ - це якорі, які доз
+//{2,6} кількість повторів класу, як приклад a{1,3} - символ a може повторюватись від 1 до 3х разів, а \d{2} - означає, що число може повторюватись рівно 2 рази
+
+//Методи для пошуку співпадінь у строках
+let str = 'NNnigggers';
+str.search(regex);
+//Робить пошук у строці та повертає індекс символу, який перший був знайдений. .search() може шукати тільки перше входження
+str.match(regex);
+//Якщо виставлений глобальний флаг, то .match() поверне масив з кількома строками, які були знайдені, навіть якщо був знайдений одина строка. Якщо не виставлен флаг g, то повернеться масив, де буде перша знайдена строка, індекс першого символу у строці, та сама строка, з якої робився пошук
+str.replace(regex, '***');
+//Метод .replace() у строки, який дозволяє міняти одні символи на інші може приймати регулярний вираз та заміняти знайдені входження на потрібний вміст (replace не змінює оригінальну строку, а натомість повертає нову)
+// У рядку заміни replacement ми можемо використовувати спеціальні комбінації символів для вставки фрагментів збігу:
+// $&	вставляє всі знайдені збіги
+// $`	вставляє частину рядка до збігу
+// $'	вставляє частину рядка після збігу
+// $n	якщо n це 1-2 значне число, вставляє вміст n-ї скобочної групи регулярного виразу
+// $<name>	вставляє вміст скобочної групи з ім’ям name
+// $$	вставляє символ "$"
+
+//Методи об'єкту регулярних виразів
+regex.test(str);
+//Метод .test() у регулярному виразі - приймає строку, повертає true або false, якщо є співпадіння у з регулярним виразом у цій строці
+console.log(regex.test(str));
+
