@@ -1,0 +1,23 @@
+{
+    "joks": [
+        {
+            "jokes": [
+                {
+                  "id": 101,
+                  "setup": "Who is Santa's favorite singer?",
+                  "punchLine": "Elf-is Presley!"
+                },
+                {
+                  "id": 102,
+                  "setup": "Who is Santa's favorite singer?",
+                  "punchLine": "Elf-is Presley!"
+                },
+                {
+                  "id": 103,
+                  "setup": "Who is Santa's favorite singer?",
+                  "punchLine": "Elf-is Presley!"
+                }
+              ]
+        }
+    ]
+}

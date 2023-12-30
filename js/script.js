@@ -2,8 +2,6 @@
 
 "use strict";
 
-const test = require('./test.js');
-
 // let bum = 4;
 // const ken = 10;
 
@@ -1915,7 +1913,7 @@ const test = require('./test.js');
 //Ключові методи localstorage - localstorage.getItem('') - приймає у виляди строки ключ, повертає значення цього ключа у localstorage. localStorage.setItem('', value) - приймає ключ і значення, записує їх у localstorage Таким чином можна записати нові, або перезаписати вже існуючі дані. localstorage.clear() - очищає localstorage на сторінці
 
 //Regex регулярні вирази
-let regex = /nig/;
+// let regex = /nig/;
 //у // записується сам патерн, а після записуються додаткові флаги для виразу 
 //Флаги виразів:
 //i - поза регістром
@@ -2057,15 +2055,297 @@ let regex = /nig/;
 // import mainFoo from './test.js';
 
 //try catch errors
-try {
-    if(!a) {
-        throw new ReferenceError('A is iccorect');
+// try {
+//     if(!a) {
+//         throw new ReferenceError('A is iccorect');
+        
+//     }
+// } catch (error) {
+//     console.log(error.name);
+//     console.log(error.message);
+//     console.log(error.stack);
+// } finally {
+//     console.log('Дія виконається у будь-якому разі наприкінці');
+// }
+// Для відловлювання помилок використовується try catch. Завдяки throw можна "викидувати" свої помилки. Це може бути об'єкт Error, або SyntaxError, або TypeError. У об'єкт помилки можна передати своє повідомлення. У помилки є властивості .name - по суті тип помилки, .message - інформація про помилку, .stack - це ланцюг виконання ряду скриптів, які призвели до помилки. Також можна створити свої класи помилок, які будуть наслідуватись від основного класу помилки. У try catch можна також вказати блок finally { } який виконається у будь якому разі чи буде помилка, чи ні (хоча, напевно це має не багато сенцу, бо таким кодом можна вважати будь який інший код, який виконуватиметься після try catch)
+
+// Jquery
+// $('.wrapper');
+//$ - стандартна функція jQuery дозволяє отримати елемент по селектору 
+// .children()
+// шукає дочірній елемент
+// .closest()
+// найближчий батьківський елемент
+// .parent()
+// повертає батьківський елемент у усіх переданих елементах
+// .parents()
+// повертає усі батьківські елементи
+// .prev()
+// минулий елемент, який стоїть поруч
+// .next() 
+//наступний елемент
+
+// .each()
+//Як for each
+// .map()
+//Як map у масивів
+// .eq()
+// Повертає елемент з набору по індексу
+// .filter()
+// Як filter у масиві
+// .is()
+// Як some
+// .add()
+//Як push
+
+//Функції генератори можуть повертати при кожному наступному виклику різні значення. Зазвичай повертається об'єкт зі значеннями value та done Коли варіанти закінчуюються, то у value записується undefined у done: true
+// function* generationNums(n) {
+//     for(let i = 0; i < n; i++) {
+//         yield i;
+//     }
+// }
+// const result = generationNums(5);
+// console.log(result.next()); 
+//{value: 0, done: false}
+// console.log(result.next()); 
+//{value: 1, done: false}
+// console.log(result.next()); 
+//{value: 2, done: false}
+// console.log(result.next()); 
+//{value: 3, done: false}
+// console.log(result.next()); 
+//{value: 4, done: false}
+// console.log(result.next()); 
+//{value: undefined, done: true}
+// Також її можна перебрати через цикл for of
+// for(let i of generationNums(5)) {
+//     console.log(i);
+// }
+
+//Анімації Request animation frame, Animation API
+// function animateElement(element) {
+//     debugger;
+//     let position = getComputedStyle(element).transform;
+//     console.log(position);
+//     if(!position || position === 'none') {
+//         position = 0;
+//     } else {
+//         position = position.slice(7, -1).split(', ');
+//         position = +position[position.length-1];
+//     }
+//     if(position !== 300) {
+//         position++;
+//         element.style.transform = `translateY(${position}px)`;
+//         requestAnimationFrame(()=>{
+//             animateElement(element);
+//         });
+//     }
+// }
+// btnPhone.addEventListener('click', ()=>{
+//     requestAnimationFrame(()=>{
+//         animateElement(images[0]);
+//     });
+// });
+//Таким чином ми зробили анімацію по натисканню кнопки, яка рухає елемент на 300 пікселів вниз
+//Може виникнути питання, як у такому випадку контролювати довжину програвання анімації? Так, напряму не можна задавати час виконання, або передати, з яким інтервалом функція буде виконуватись. Але можна враховувати, що за відстутністю лагів рендерінг відбувається з частотою 60 кадрів на секунду, або кожні 16.7 мілісекунд - це і є стандартний інтервал виконання requestAnimationFrame, тому на основі цього можна вирахувати потрібний розмір кроку анімації. Але бажано враховувати, що анімація не завжди відбувається 60 кадрів на секунду, особливо, якщо це екран, де більше, ніж 60 герц, або якщо браузер десь підлагує, то це також уповільнює рендерінг, тому краще кожен крок анімації вираховувати на основі того, скільки пройшло часу з останнього кроку
+// let time,
+// estimatedPrev,
+// maxAnimationDurationMs = 400,
+// maxAnimationPositionPx = 300;
+// function animateElement(element) {
+//     debugger;
+//     let position = getComputedStyle(element).transform;
+//     if(!position || position === 'none') {
+//         position = 0;
+//     } else {
+//         position = position.slice(7, -1).split(', ');
+//         position = +position[position.length-1];
+//     }
+//     if(position < maxAnimationPositionPx) {
+//         let estimated = new Date().getTime() - estimatedPrev;
+//         estimatedPrev = new Date().getTime();
+//         let step = maxAnimationPositionPx / (maxAnimationDurationMs / estimated);
+//         position += step;
+//         element.style.transform = `translateY(${position}px)`;
+//         requestAnimationFrame(()=>{
+//             animateElement(element);
+//         });
+//     }
+// }
+// btnPhone.addEventListener('click', ()=>{
+//     time = new Date().getTime();
+//     estimatedPrev = time;
+//     requestAnimationFrame(()=>{
+//         animateElement(images[0])
+//     });
+// });
+//Як приклад такого коду - вище. Для того, щоби не залежати від фактичної частоти кадрів, а програвати анімацію саме стільки часу, скільки необхідно, ми вираховуємо скільки часу проходить між минулим та поточним кроком і на основі максимального значення позиції анімації та часу анімації вираховуємо потрібну довжину кроку за кожну ітерацію на основі того часу, що пройшло. По формулі: точка призначення анімації / (довжина анімації / час, який пройшов між кроками)
+//Об'єкт Animation
+// btnPhone.addEventListener('click', ()=>{
+//     let animation = images[0].animate([
+//         {
+//             transform: 'translateY(0px)',
+//         },
+//         {
+//             transform: 'translateY(300px)',
+//         },
+//     ], {
+//         duration: 400,
+//         fill: 'forwards',
+//     });
+// });
+//Приклад коду, такої самої анімації, яка написана з використанням Web Animations API. За логікою дуже схоже на CSS3 анімації. Створюємо об'єкт Animation, викликаючи метод .animate() на Element, він повертає цей об'єкт, у параметри передаємо масив з кейфреймами (об'єкти класу KeyframeEffect) та об'єкт з параметрами анімації, які практично ідетичні до CSS3 стандарту.
+// let animation;
+// btnPhone.addEventListener('click', ()=>{
+//     if(!animation) {
+//         animation = images[0].animate([
+//             {
+//                 transform: 'translateY(0px)',
+//             },
+//             {
+//                 transform: 'translateY(300px)',
+//                 opacity: 0,
+//                 display: 'none',
+//             },
+//         ], {
+//             duration: 5000,
+//             fill: 'forwards',
+//         });
+//     } else {
+//         if(animation.playState === 'running') {
+//             animation.pause();
+//         } else {
+//             if (animation.playState === 'paused') {
+//                 animation.play();
+//             }
+//         }
+//     }
+//     if(animation.playState === 'idle') {
+//         animation.play();
+//     }
+// });
+// btnMacbook.addEventListener('click', ()=> {
+//     if(animation) {
+//         animation.cancel();
+//     }
+// });
+//З ключових покращень в порівнянні зі звичайними CSS3 анімаціями - це те, що тепер можна маніпулювати будь якими властивостями стилів, навіть тими, які раніше не піддавались анімації, наприклад display - що тепер значно розширює можливості анімацій, які зав'язані на появі, або зникненні елементів. Також анімаціями можно досить гнучко керувати, ставити їх на паузу, відміняти, програвати знову, отримувати кейфрейм поточного стану елементу.
+
+
+// const compose = (...functions) => {
+//     return (args) => {
+//         console.dir(functions);
+//         let result = args;
+//         for(let i = functions.length - 1; i >= 0; i--) {
+//             result = functions[i](result);
+//         }
+//         return result;
+//     }
+// };
+
+// const composeWithArgs = (...functions) => {
+//     return (...args) => {
+//         let result = 0;
+//         for(let i = functions.length - 1; i >= 0; i--) {
+//             if (i === functions.length - 1) {
+//                 result = functions[i](...args);
+//             } else {
+//                 result = functions[i](result);
+//             }
+//         }
+//         return result;
+//     }
+// };
+
+// const foo1 = (n) => n + 4;
+// const foo2 = (n) => n * 2;
+// const foo3 = (n) => n / 7;
+// const foo4 = (n1, n2, n3) => n1 + n2 + n3;
+
+// let discount = compose(foo1, foo2, foo3);
+// let discount2 = composeWithArgs(foo1, foo2, foo3, foo4);
+
+// console.log(discount(300));
+// console.log(discount2(324, 232, 22));
+
+// Event loop, Web API, Call Stack, Queue callback
+// Код може бути синхронним та асинхронним, це я вже знаю. Але треба також розуміти життєвий цикл виконання синхронного та асинхронного коду, або цикл подій (Event loop). У середовищі виконання існують такі речі, як Web API, Call Stack, Queue callback. Якщо казати про синхроний код, то він звісно виконується зверху вниз і виконується по операціям (задачі), кожна таска спочатку потрапляє у чергу Queue callback, та після того, як настає її черга, потрапляє у Call Stack - у стан, коли вона починає виконуватись. У синхроного коду можуть бути підзадачі. Як приклад, цикли фор, або фор іч, або усі синхронні операції, які викликаються в середині іншої синхронної операції, вони не потрапляють вже у Queue callback, а виконуються одразу у Call Stack, тому Call Stack - це певний "канал", через який, а бо у якому виконуються операції нашого коду. Коли на якомусь етапі виконується асинхронний код, то він потрапляє у Web Api - який очікує результат виконання асинхронної операції, а паралельно тим часом інщі поточні операції, виконуються у Call Stack, після виконання звільняють стек і перша у черзі Queue callback потрапляє у стек. Коли Web API дочекався результату виконання якоїсь з операцій, яка лежить у ньому, він відправляє її у Queue callback чергу, щоби та дочекалась своєї черги та виконалась у Call Stack. Все це, звісно відбувається за мілісекунди і це важливо розуміти, як саме виконується той чи інший код. Важливо розуміти, що забивати Call Stack довгою та великою операцією не варто, якщо є інші задачі, які варто виконати. У такому разі важкі задачі варто розбити на підзадачі, які виконаються послідовно, або виконати важку задачу у синхроному режимі у Web API, щоби могли виконатись інші операції. Забивання Call Stack приводить до зависання сторінки. Також важливо не забивати Queue callback чергу, бо переповнення цієї черги може призвести до витоку пам'яті та зависанню браузера.
+//Також усі задачі розподіляються на макро задачі та мікро задачі. Вприципі, усі задачі, що не виконуються у обробниках промісів .then/.catch/.finally - є макро задачами та вони потрапляють у одну чергу Queue callback макро задач, але задачі, які виконуються у .then/.catch/.finally є мікрозадачами і вони завжди потрапляють у чергу мікро задач і порядок виконання виникає такий, що спочатку виконується макрозадача, а потім після неї виконуються уся черга з мікро задач і після відбувається рендерінг, після чого виконується наступна у черзі макро задача і знову, якщо за цей проміжок у черзі мікрозадач з'явились нові операції, то у такому разі знову виконується черга мікро задач і після виконується рендерінг. Це робиться для того, щоби мікро задачі виконувались гарантовано до обробки подій та рендерінгу сторінки, щоби зберегти поточний стан сторінки. Можна також примусово виконати операцію, як мікрозадачу викликавши функцію queueMicrotask(func)
+
+// function disemvowel(str) {
+//     let result = str.replace(/[aeiou]/gi, '');
+//     return result;
+// }
+
+// console.log(disemvowel('This website is for losers LOL!'));
+
+// async function sayJoke(apiUrl, jokeId){
+//     let aceptedUrl = 'http://localhost:3000/joks';
+//     if(apiUrl !== aceptedUrl) {
+//         throw new Error(`No jokes at url: ${apiUrl}`);
+//     }
+//     let result = await fetch(apiUrl)
+//     .then(response => {
+//         return response.json();
+//     })
+//     .then(data => {
+//         debugger;
+//         let joke = data[0].jokes.filter(item => item['id'] === jokeId)[0];
+//         if(joke) {
+//             joke.saySetup = function () {
+//                 return this.setup;
+//             }
+//             joke.sayPunchLine = function () {
+//                 return this.punchLine;
+//             }
+//             return joke;
+//         } else {
+//             throw new Error(`No jokes found id: ${jokeId}`);
+//         }
+//     })
+//     .catch( (error) => {
+//         console.log(error.message);
+//         throw error;
+//     });
+//     return result;
+// }
+
+// let testRes; 
+// sayJoke('http://localhost:3000/joks', 777)
+// .then(result => {
+//     testRes = result;
+//     console.log(testRes, testRes.saySetup(), testRes.sayPunchLine());
+// })
+// .catch((error)=>{
+//     console.log(error.message);
+//     throw error;
+// });
+
+
+
+function likes(names) {
+    if(names.length < 1) {
+        return 'no one likes this';
     }
-} catch (error) {
-    console.log(error.name);
-    console.log(error.message);
-    console.log(error.stack);
-} finally {
-    console.log('Дія виконається у будь-якому разі наприкінці');
-}
+    if(names.length === 1) {
+        return `${names[0]} likes this`;
+    }
+    if(names.length === 2) {
+        return `${names[0]} and ${names[1]} like this`
+    }
+    if(names.length === 3) {
+        return `${names[0]}, ${names[1]} and ${names[2]} like this`
+    }
+    return `${names[0]}, ${names[1]} and ${names.length - 2} others like this`
+  }
+
+  console.log(likes(["Alex", "Jacob", "Mark", "Max"]));
+  console.log(likes([]));
+  console.log(likes(["Alex"]));
+  debugger;
+  console.log(likes(["Alex", "Jacob"]));
+  debugger;
+  console.log(likes(["Alex", "Jacob", "Mark"]));
+
+  console.log(likes(["Alex", "Jacob", "Mark", "Max", "Max", "Max", "Max", "Max", "Max"]));
 
